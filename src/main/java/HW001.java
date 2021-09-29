@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class FirstHW {
+public class HW001 {
     /*
 Создать массив из 10 рандомных чисел
  И сделать его сортировку ВСТАВКАМИ
