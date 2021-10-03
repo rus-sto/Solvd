@@ -14,8 +14,7 @@ public class HW001 {
 
         sortArray(array);
 
-        System.out.println();
-        System.out.println(Arrays.toString(array));
+        System.out.println("\n" + Arrays.toString(array));
     }
 
     public static int[] fillArray(int[] array) {
