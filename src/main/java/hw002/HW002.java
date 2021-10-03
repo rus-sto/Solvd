@@ -24,9 +24,19 @@ public class HW002 {
      */
     public static void main(String[] args) {
         // Принимаем в расчет , что все квартиры в доме и комнаты в квартирах ординаковые. Дом одноподъездный
-//Вводим стоимость 1 м2, количество этажей, количество квартир, количество комнат, размер комнат
+//Вводим  количество этажей, количество квартир, количество комнат, размер комнат
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Input number of flores");
+        int numberOfFlares = scanner.nextInt();
+        Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Input number of flats per each flore");
+        int flatsPerFlore = scanner1.nextInt();
+        Scanner scanner2 = new Scanner(System.in);
+        System.out.println("Input number of rooms in each flat");
+        int numberOfRooms = scanner2.nextInt();
+        Scanner scanner3 = new Scanner(System.in);
         System.out.println("Input room size (m2)");
-        double square = scanner.nextDouble();
+        double square = scanner3.nextDouble();
+
     }
 }
