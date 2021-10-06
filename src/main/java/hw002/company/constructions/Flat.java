@@ -39,21 +39,21 @@ public class Flat {
         return  rez;
     }
 
-    public int getCountRoom() {
-        return countRoom;
-    }
-
-    public void setCountRoom(int countRoom) {
-        this.countRoom = countRoom;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
+//    public int getCountRoom() {
+//        return countRoom;
+//    }
+//
+//    public void setCountRoom(int countRoom) {
+//        this.countRoom = countRoom;
+//    }
+//
+//    public Room getRoom() {
+//        return room;
+//    }
+//
+//    public void setRoom(Room room) {
+//        this.room = room;
+//    }
 
     @Override
     public boolean equals(Object o) {

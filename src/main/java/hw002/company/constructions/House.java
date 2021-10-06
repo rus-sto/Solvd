@@ -19,7 +19,7 @@ public class House {
     private int countTwoRoomFlat;
     private Flat threeRoomFlat;
     private int countThreeRoomFlat;
-    private Date buildDate;
+
     private LocalDateTime startBuild;
     private LocalDateTime finishBuild;
 
@@ -34,8 +34,8 @@ public class House {
     }
 
     public double totalHouseArea(double areaFlat, int countTwoRoomFlat) {
-        String rez = String.format("%.2f", areaFlat * countTwoRoomFlat + EXTRA_HOUSE_AREA + countTwoRoomFlat * 2);
-        System.out.println("Total House AREA is " + rez);
+        String rez1 = String.format("%.2f", areaFlat * countTwoRoomFlat + EXTRA_HOUSE_AREA + countTwoRoomFlat * 2);
+        System.out.println("Total House AREA is " + rez1);
         return areaFlat * countTwoRoomFlat + EXTRA_HOUSE_AREA + countTwoRoomFlat * 2;
     }
 
@@ -47,6 +47,8 @@ public class House {
                 (COST_HOUSE_ROOF + COST_HOUSE_GROUND) * totalHouseArea(areaFlat,countTwoRoomFlat);
     }
     public long produceTimeOfHouse (long produceTimeOfFlat, int countTwoRoomFlat) {
+        startBuild = LocalDateTime.now();
+        System.out.println("If we start building - " + startBuild);
         long totalHouseExtraSeconds = (long) ((EXTRA_TIME_PRODUCE_FOR_HOUSE.getHour() * 3600
                 + EXTRA_TIME_PRODUCE_FOR_HOUSE.getMinute() * 60
                 + EXTRA_TIME_PRODUCE_FOR_HOUSE.getSecond()) );
@@ -57,6 +59,8 @@ public class House {
         int min = (int) (rez / 60 % 60);
         int sec = (int) (rez / 1 % 60);
         System.out.println(String.format("%s days %s:%s:%s", days, hour, min, sec));
+        finishBuild = LocalDateTime.now().plusSeconds(rez);
+        System.out.println("The building will be finished at " + finishBuild);
         return  rez;
     }
 
