@@ -1,6 +1,8 @@
 package hw002.company.constructions;
 
 import hw002.company.PrintBlock;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
 
@@ -9,6 +11,7 @@ public class Stage extends PrintBlock {
     private static final int EXTRA_STAGE_AREA = 15;
     private static final int COST_STAGE_EXTRA_AREA = 50;
     private static final LocalTime EXTRA_TIME_PRODUCE_FOR_STAGE = LocalTime.of(15, 00, 00);
+    private static final Logger LOGGER = LogManager.getLogger(Stage.class);
 
     private Flat oneRoomFlat;
     private int countOneRoomFlat;
@@ -41,7 +44,6 @@ public class Stage extends PrintBlock {
                                  double threeRoomFlatCost, int countThreeRoomFlat) {
         double rez = oneRoomFlatCost * countOneRoomFlat + twoRoomFlatCost * countTwoRoomFlat +
                 threeRoomFlatCost * countThreeRoomFlat + COST_STAGE_EXTRA_AREA;
-//        System.out.println("Total oneStage COST is " + String.format("%.2f", rez) + " special units");
         return rez;
     }
 
@@ -54,7 +56,6 @@ public class Stage extends PrintBlock {
         long rez = (produceTimeOneRoomFlats + totalFlatExtraSeconds) * countOneRoomFlat +
                 (produceTimeTwoRoomFlats + totalFlatExtraSeconds) * countTwoRoomFlat +
                 (produceTimeThreeRoomFlats + totalFlatExtraSeconds) * countThreeRoomFlat;
-//        System.out.println("Stage produce time is  " + rez + " seconds");
         return  rez;
     }
 
@@ -108,7 +109,7 @@ public class Stage extends PrintBlock {
 
     @Override
     public void printInfo() {
-        System.out.println("Each stage has: \n- " + getCountOneRoomFlat() + " oneRoomFlats; \n- " + getCountTwoRoomFlat() + " twoRoomFlats; \n- "
+        LOGGER.debug("Each stage has: \n- " + getCountOneRoomFlat() + " oneRoomFlats; \n- " + getCountTwoRoomFlat() + " twoRoomFlats; \n- "
         + getCountThreeRoomFlat() + " threeRoomFlats.");
     }
 }

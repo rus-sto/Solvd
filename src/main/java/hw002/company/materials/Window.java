@@ -1,10 +1,14 @@
 package hw002.company.materials;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Objects;
 
 public class Window {
 
     private static final int COST_ONE_METER_WINDOW = 5;
+    private static final Logger LOGGER = LogManager.getLogger(Window.class);
 
     private double wight;
     private double high;
@@ -16,9 +20,10 @@ public class Window {
 
     public  double costWindowCalc(double wight, double high){
         String rez = String.format("%.2f",wight * high * COST_ONE_METER_WINDOW);
-        System.out.println("this Window Cost is " + rez);
+        LOGGER.debug("this Window Cost is" + rez);
         return wight * high * COST_ONE_METER_WINDOW;
     }
+
     public double getWight() {
         return wight;
     }

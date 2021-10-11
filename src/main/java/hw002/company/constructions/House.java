@@ -1,6 +1,9 @@
 package hw002.company.constructions;
 
 import hw002.company.PrintBlock;
+import hw002.company.exceptions.StageException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,6 +20,7 @@ public class House extends PrintBlock {
     private static final int COST_HOUSE_ROOF = 15;
     private static final int COST_HOUSE_GROUND = 9;
     private static final LocalTime EXTRA_TIME_PRODUCE_FOR_HOUSE = LocalTime.of(20, 00, 00);
+    private static final Logger LOGGER = LogManager.getLogger(House.class);
 
     private Flat oneRoomFlat;
     private int countOneRoomFlat;
@@ -147,7 +151,10 @@ public class House extends PrintBlock {
         return stageQuantity;
     }
 
-    public void setStageQuantity(int stageQuantity) {
+    public void setStageQuantity(int stageQuantity) throws StageException {
+        if (stageQuantity <= 0){
+            throw new StageException("Number of stages must be natural");
+        }
         this.stageQuantity = stageQuantity;
     }
 
@@ -222,7 +229,7 @@ public class House extends PrintBlock {
 
     @Override
     public void printInfo() {
-        System.out.println(" \n This house situated in " + getAddress() + ". \n Has - " +
+        LOGGER.debug(" \n This house situated in " + getAddress() + ". \n Has - " +
                 stageQuantity + " stages; \n- " + stage.getCountOneRoomFlat() * stageQuantity + " OneRoomFlats; \n- " +
                 stage.getCountTwoRoomFlat() * stageQuantity + " TwoRoomFlats; \n- " + stage.getCountThreeRoomFlat() * stageQuantity + " ThreeRoomFlats; " +
                 "\nTotal Area of thr House is - " + houseArea + " m2! ; \nTotal House cost is - " + houseCost +

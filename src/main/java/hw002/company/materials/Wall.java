@@ -2,14 +2,15 @@ package hw002.company.materials;
 
 import java.util.Objects;
 
-public class Wall {
+public class Wall extends AreaImpl{
 
     private double length;
     private double high;
 
     public Wall(double length, double high) {
-        this.length = length;
-        this.high = high;
+        super(length,high);
+//        this.length = length;
+//        this.high = high;
     }
 
     public double wallAreaCalc(double length, double high) {

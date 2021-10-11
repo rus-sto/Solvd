@@ -2,12 +2,15 @@ package hw002.company.constructions;
 
 import hw002.company.PrintBlock;
 import hw002.company.materials.CostImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
 
 public class Roof extends PrintBlock {
     private static final LocalTime TIME_PRODUCE_FOR_METER_ROOF = LocalTime.of(1,10,00);
     private static final double COST_ROOF_COEFFICIENT = 1.3;
+    private static final Logger LOGGER = LogManager.getLogger(Roof.class);
 
     private Stage stage;
     private double roofCostRez;
@@ -18,14 +21,12 @@ public class Roof extends PrintBlock {
 
     public double roofAreaCalc (double oneStageArea) {
         double roofSquare = oneStageArea ;
-        //        System.out.println("Total Fundament AREA is " + String.format("%.2f", roofSquare));
         return roofSquare;
     }
 
     public double roofCostCalc(double roofSquare) {
         CostImpl roofCost = new CostImpl(roofSquare);
         double roofCostRez = roofCost.costSquareCount(roofSquare) * COST_ROOF_COEFFICIENT;
-//        System.out.println("Total COST of THE roof  is " + String.format("%.2f", roofCostRez));
         return roofCostRez;
     }
 
@@ -34,12 +35,12 @@ public class Roof extends PrintBlock {
                 + TIME_PRODUCE_FOR_METER_ROOF.getMinute() * 60
                 + TIME_PRODUCE_FOR_METER_ROOF.getSecond()));
         long rez = roofSeconds * (long)roofSquare;
-        System.out.println("We need " + rez + " seconds to build the roof");
+        LOGGER.debug("We need " + rez + " seconds to build the roof");
         int days = (int) (rez / 3600 / 24);
         int hour = (int) (rez / 3600 % 24);
         int min = (int) (rez / 60 % 60);
         int sec = (int) (rez / 1 % 60);
-        System.out.println(String.format("%s days %s:%s:%s", days, hour, min, sec));
+        LOGGER.debug(String.format("%s days %s:%s:%s", days, hour, min, sec));
         return rez;
     }
 
@@ -53,6 +54,6 @@ public class Roof extends PrintBlock {
 
     @Override
     public void printInfo() {
-        System.out.println("Our Roof cost is XX special units");
+        LOGGER.debug("Our Roof cost is " + getRoofCostRez() + " special units");
     }
 }

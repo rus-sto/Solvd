@@ -1,17 +1,19 @@
 package hw002.company.constructions;
 
-
 import hw002.company.PrintBlock;
 import hw002.company.materials.AreaImpl;
 import hw002.company.materials.CostImpl;
 import hw002.company.materials.Wall;
 import hw002.company.materials.Window;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
 import java.util.Objects;
 
 public class Room extends PrintBlock {
 
+    private static final Logger LOGGER = LogManager.getLogger(Room.class);
     private static final LocalTime PRODUCE_TIME_FOR_ONE_SQUARE_METER = LocalTime.of(1, 00, 00);
 
     private Window window;
@@ -20,33 +22,39 @@ public class Room extends PrintBlock {
     private Wall secondWall;
     private double roomSquare;
 
-    public Room(Wall firstWall, Wall secondWall, Window window, int countWindows) {
+    public Room(Wall firstWall, Wall secondWall, Window window) {
         this.firstWall = firstWall;
         this.secondWall = secondWall;
         this.window = window;
-        this.countWindows = countWindows;
     }
 
     public double areaRoomCalc(double firstWallLength, double secondWallLength) {
         AreaImpl roomArea = new AreaImpl(firstWallLength, secondWallLength);
         double roomSquare = roomArea.countSquare(firstWallLength, secondWallLength);
-//        System.out.println("this room area is " + String.format("%.2f", roomSquare) + "m2!");
         return roomSquare;
+    }
+    public int countWindowCalc(double roomSquare) {
+        if (roomSquare <= 15){
+            countWindows = 1;
+        }else if(roomSquare <=22) {
+            countWindows = 2;
+        }else {
+            countWindows = 3;
+        }
+        return countWindows;
     }
 
     public double costRoomAreaCalc(double areaRoom) {
         CostImpl roomCost = new CostImpl(areaRoom);
         double rez = roomCost.costSquareCount(areaRoom);
-//        System.out.println("this roomArea COST is " + String.format("%.2f", rez) + " special units");
         return rez;
     }
 
     public double costRoom(double costRoomAreaCalc, double costWallA, double costWallB) {
-//        System.out.println("this Room Cost is " + String.format("%.2f",costRoomAreaCalc + 2 * costWallA + 2 * costWallB));
         return costRoomAreaCalc + 2 * costWallA + 2 * costWallB;
     }
 
-    public double TotalRoomCost(double costRoom, double costWindow) {
+    public double TotalRoomCost(double costRoom, double costWindow,int countWindows) {
         String rez = String.format("%.2f", costRoom + costWindow * countWindows);
         System.out.println("this Room  Total Cost with window is " + rez + " special units");
         return costRoom + costWindow * countWindows;
@@ -121,7 +129,7 @@ public class Room extends PrintBlock {
 
     @Override
     public void printInfo() {
-        System.out.println("Each room is made of walls  \n- " + firstWall.getLength() + "m length and \n-" + firstWall.getHigh() + " m high,\n and \n-" +
-                secondWall.getLength() + "m length and \n-" + secondWall.getHigh() + " m high.");
+        LOGGER.debug("Each room is made of walls  \n- " + firstWall.getLength() + "m length and \n-" + firstWall.getHigh() + " m high,\n and \n-" +
+                secondWall.getLength() + "m length and \n-" + secondWall.getHigh() + " m high. \n And has " + countWindows + " windows");
     }
 }

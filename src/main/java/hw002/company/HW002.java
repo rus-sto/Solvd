@@ -4,43 +4,46 @@ package hw002.company;
 import hw002.company.constructions.*;
 import hw002.company.materials.Wall;
 import hw002.company.materials.Window;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class HW002 {
-    /**
-     * number of 1-room flats, number of 2-room flats, number of 3-room flats,
-     *
-     * @param args
-     */
+
+    static {
+        System.setProperty("log4j.configurationFile", "log4j2.xml");
+    }
+
+    private static final Logger LOGGER = LogManager.getLogger(HW002.class);
 
     public static void main(String[] args) {
 
-        System.out.println("Input quantity of oneRoomFlats per stage");
+        LOGGER.debug("Input quantity of oneRoomFlats per stage");
         Scanner scanner1 = new Scanner(System.in);
         int oneRoomFlatsQuantity = scanner1.nextInt();
-        System.out.println("Input quantity of twoRoomFlats per stage");
+        LOGGER.debug("Input quantity of twoRoomFlats per stage");
         Scanner scanner2 = new Scanner(System.in);
         int twoRoomFlatsQuantity = scanner2.nextInt();
-        System.out.println("Input quantity of threeRoomFlats per stage ");
+        LOGGER.debug("Input quantity of threeRoomFlats per stage ");
         Scanner scanner3 = new Scanner(System.in);
         int threeRoomFlatsQuantity = scanner3.nextInt();
 
         int[] flatsQuantityArray = new int[]{oneRoomFlatsQuantity, twoRoomFlatsQuantity, threeRoomFlatsQuantity};
-        System.out.println(Arrays.toString(flatsQuantityArray));
+        LOGGER.debug(Arrays.toString(flatsQuantityArray));
 
-        System.out.println("Input High of walls of flats ");
+        LOGGER.debug("Input High of walls of flats ");
 
         Scanner scanner4 = new Scanner(System.in);
         double wallHigh = scanner4.nextDouble();
 
-        System.out.println("Input wallOne Length of flats ");
+        LOGGER.debug("Input wallOne Length of flats ");
 
         Scanner scanner5 = new Scanner(System.in);
         double wallOneLength = scanner5.nextDouble();
 
-        System.out.println("Input wallTwo Length of flats ");
+        LOGGER.debug("Input wallTwo Length of flats ");
 
         Scanner scanner6 = new Scanner(System.in);
         double wallTwoLength = scanner6.nextDouble();
@@ -48,38 +51,35 @@ public class HW002 {
         Wall wallOne = new Wall(wallOneLength, wallHigh);
         Wall wallTwo = new Wall(wallTwoLength, wallHigh);
 
-        System.out.println("Input number of stages in the house ");
+        LOGGER.debug("Input number of stages in the house ");
 
         Scanner scanner7 = new Scanner(System.in);
         int stagesQuantity = scanner7.nextInt();
 
-        System.out.println("Input sizes of the window in the rooms  Width (enter) and  High");
+        LOGGER.debug("Input sizes of the window in the rooms  Width (enter) and  High");
 
         Scanner scanner8 = new Scanner(System.in);
         double windowWidth = scanner8.nextDouble();
         Scanner scanner9 = new Scanner(System.in);
         double windowHigh = scanner9.nextDouble();
 
-        System.out.println("Input number of windows in each room ");
-
-        Scanner scanner10 = new Scanner(System.in);
-        int countWindows = scanner10.nextInt();
-
         Window window = new Window(windowWidth, windowHigh);
+        double windowCost = window.costWindowCalc(windowWidth, windowHigh);
 
         double areaWallOne = wallOne.wallAreaCalc(wallOneLength, wallHigh);
         double costWallOne = wallOne.costWallCalc(areaWallOne);
         double areaWallTwo = wallTwo.wallAreaCalc(wallTwoLength, wallHigh);
         double costWallTwo = wallTwo.costWallCalc(areaWallTwo);
 
-        Room oneRoom = new Room(wallOne, wallTwo, window, 2);
+        Room oneRoom = new Room(wallOne, wallTwo, window);
 
         double roomArea = oneRoom.areaRoomCalc(wallOne.getLength(), wallTwo.getLength());
+        int countWindow = oneRoom.countWindowCalc(roomArea);
         double roomAreaCost = oneRoom.costRoomAreaCalc(roomArea);
         long roomProduceTime = oneRoom.produceTimeOfRoom(roomArea);
 
         double roomCost = oneRoom.costRoom((roomAreaCost), costWallOne, costWallTwo);
-        double costOfRoomTotal = oneRoom.TotalRoomCost(roomCost, window.costWindowCalc(2, 1.2));
+        double costOfRoomTotal = oneRoom.TotalRoomCost(roomCost,windowCost,countWindow);
         oneRoom.printInfo();
 
         Flat oneRoomFlat = new Flat(1, oneRoom);
@@ -112,12 +112,14 @@ public class HW002 {
         Fundament fundament = new Fundament(stage);
         double fundamentArea = fundament.fundamentAreaCalc(oneStageArea);
         double fundamentCost = fundament.fundamentCostCalc(fundamentArea);
+        fundament.setFundamentCostRez(fundamentCost);
         long fundamentProduceTime = fundament.produceTimeOfFundament(fundamentArea);
         fundament.printInfo();
 
         Roof roof = new Roof(stage);
         double roofArea = roof.roofAreaCalc(oneStageArea);
-        double roofCoat = roof.roofCostCalc(roofArea);
+        double roofCost = roof.roofCostCalc(roofArea);
+        roof.setRoofCostRez(roofCost);
         long roofProduceTime = roof.produceTimeOfRoof(roofArea);
         roof.printInfo();
 
@@ -127,9 +129,12 @@ public class HW002 {
         firstHouse.totalHouseCostCalc(oneStageCost, stagesQuantity,fundamentCost,roomCost);
         firstHouse.produceTimeOfHouse(oneStageProduceTime, stagesQuantity, fundamentProduceTime, roofProduceTime);
 
-        firstHouse.setAddress(" Minsk, Voronina 6");
+        LOGGER.debug("Input house address ");
+
+        Scanner scanner10 = new Scanner(System.in);
+        java.lang.String HouseAddress = scanner10.nextLine();
+
+        firstHouse.setAddress(HouseAddress);
         firstHouse.printInfo();
-
-
     }
 }
