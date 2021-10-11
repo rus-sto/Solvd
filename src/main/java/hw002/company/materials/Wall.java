@@ -4,26 +4,29 @@ import java.util.Objects;
 
 public class Wall {
 
-    private static final int COST_ONE_METER_WALL = 3;
-
     private double length;
     private double high;
-
 
     public Wall(double length, double high) {
         this.length = length;
         this.high = high;
     }
 
-    public double wallArea (double length, double high) {
-        String rez = String.format("%.2f",length * high);
-        System.out.println("this wall area is " + rez);
-        return length * high;
+    public double wallAreaCalc(double length, double high) {
+
+        AreaImpl wallArea = new AreaImpl(length, high);
+        double rez = wallArea.countSquare(length, high);
+//        System.out.println("this wall area is " + String.format("%.2f", rez) + "m2!");
+
+        return rez;
     }
-    public double costWall(double wallArea){
-        String rez1 = String.format("%.2f",wallArea * COST_ONE_METER_WALL);
-        System.out.println("this wall COST   is " + rez1);
-        return wallArea * COST_ONE_METER_WALL;
+
+    public double costWallCalc(double wallArea) {
+        CostImpl wallCost = new CostImpl(wallArea);
+        double rez1 = wallCost.costSquareCount(wallArea);
+//        System.out.println("this wall COST is " + String.format("%.2f", rez1) + " special units");
+
+        return rez1;
     }
 
     public double getLength() {

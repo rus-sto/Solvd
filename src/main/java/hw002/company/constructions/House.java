@@ -1,17 +1,22 @@
 package hw002.company.constructions;
 
+import hw002.company.PrintBlock;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Objects;
 
-public class House {
+public class House extends PrintBlock {
+    /**
+     * В площадь зачитывается только этажная площадь , без фундамента и крыши.
+     * В стоимость и во время считается и фундамент и крыша и этажная площадь
+     */
 
     private static final int COST_HOUSE_EXTRA_AREA = 50;
     private static final int EXTRA_HOUSE_AREA = 15;
     private static final int COST_HOUSE_ROOF = 15;
     private static final int COST_HOUSE_GROUND = 9;
-    private static final LocalTime EXTRA_TIME_PRODUCE_FOR_HOUSE = LocalTime.of(23, 35, 00);
+    private static final LocalTime EXTRA_TIME_PRODUCE_FOR_HOUSE = LocalTime.of(20, 00, 00);
 
     private Flat oneRoomFlat;
     private int countOneRoomFlat;
@@ -19,49 +24,59 @@ public class House {
     private int countTwoRoomFlat;
     private Flat threeRoomFlat;
     private int countThreeRoomFlat;
+    private String address;
+    private Stage stage;
+    private int stageQuantity;
+    private double houseArea;
+    private double houseCost;
+    private  String timeToBuild;
+    private Fundament fundament;
+    private Roof roof;
 
     private LocalDateTime startBuild;
     private LocalDateTime finishBuild;
 
-    public House(Flat oneRoomFlat, int countOneRoomFlat, Flat twoRoomFlat,
-                 int countTwoRoomFlat, Flat threeRoomFlat, int countThreeRoomFlat) {
-        this.oneRoomFlat = oneRoomFlat;
-        this.countOneRoomFlat = countOneRoomFlat;
-        this.twoRoomFlat = twoRoomFlat;
-        this.countTwoRoomFlat = countTwoRoomFlat;
-        this.threeRoomFlat = threeRoomFlat;
-        this.countThreeRoomFlat = countThreeRoomFlat;
+    public House(Stage stage, int stageQuantity, Fundament fundament, Roof roof) {
+        this.stage = stage;
+        this.stageQuantity = stageQuantity;
+        this.fundament = fundament;
+        this.roof = roof;
+    }
+    //    public House(Stage stage, int stageQuantity) {
+//        this.stage = stage;
+//        this.stageQuantity = stageQuantity;
+//    }
+
+    public double totalHouseAreaCalc(double oneStageArea, int stageQuantity) {
+        houseArea = oneStageArea * stageQuantity + EXTRA_HOUSE_AREA;
+//        System.out.println("Total House AREA is " + String.format("%.2f", houseArea));
+        return houseArea;
     }
 
-    public double totalHouseArea(double areaFlat, int countTwoRoomFlat) {
-        String rez1 = String.format("%.2f", areaFlat * countTwoRoomFlat + EXTRA_HOUSE_AREA + countTwoRoomFlat * 2);
-        System.out.println("Total House AREA is " + rez1);
-        return areaFlat * countTwoRoomFlat + EXTRA_HOUSE_AREA + countTwoRoomFlat * 2;
+    public double totalHouseCostCalc(double oneStageCost, int stageQuantity, double fundamentCost, double roofCost) {
+        houseCost = oneStageCost * stageQuantity + COST_HOUSE_EXTRA_AREA +
+               fundamentCost + roofCost;
+//        System.out.println("Total COST of THE House  is " + String.format("%.2f", houseCost));
+        return houseCost;
     }
 
-    public double totalHouseCost(double costFlat, int countTwoRoomFlat, double areaFlat) {
-        String rez = String.format("%.2f", costFlat * countTwoRoomFlat + COST_HOUSE_EXTRA_AREA +
-                (COST_HOUSE_ROOF + COST_HOUSE_GROUND) * totalHouseArea(areaFlat,countTwoRoomFlat));
-        System.out.println("Total COST of THE House  is " + rez);
-        return costFlat * countTwoRoomFlat + COST_HOUSE_EXTRA_AREA +
-                (COST_HOUSE_ROOF + COST_HOUSE_GROUND) * totalHouseArea(areaFlat,countTwoRoomFlat);
-    }
-    public long produceTimeOfHouse (long produceTimeOfFlat, int countTwoRoomFlat) {
+    public long produceTimeOfHouse(long produceTimeOfStage, int stageQuantity, long produceTimeOfFundament, long produceTimeOfRoof) {
         startBuild = LocalDateTime.now();
         System.out.println("If we start building - " + startBuild);
         long totalHouseExtraSeconds = (long) ((EXTRA_TIME_PRODUCE_FOR_HOUSE.getHour() * 3600
                 + EXTRA_TIME_PRODUCE_FOR_HOUSE.getMinute() * 60
-                + EXTRA_TIME_PRODUCE_FOR_HOUSE.getSecond()) );
-        long rez = produceTimeOfFlat * countTwoRoomFlat + totalHouseExtraSeconds;
-        System.out.println("House quantity of seconds is  " + rez);
+                + EXTRA_TIME_PRODUCE_FOR_HOUSE.getSecond()));
+        long rez = produceTimeOfStage * stageQuantity + totalHouseExtraSeconds + produceTimeOfFundament + produceTimeOfRoof;
+        System.out.println("We need " + rez + " seconds to build this house!");
         int days = (int) (rez / 3600 / 24);
         int hour = (int) (rez / 3600 % 24);
         int min = (int) (rez / 60 % 60);
         int sec = (int) (rez / 1 % 60);
-        System.out.println(String.format("%s days %s:%s:%s", days, hour, min, sec));
+        timeToBuild = String.format("%s days %s:%s:%s", days, hour, min, sec);
+        System.out.println(timeToBuild);
         finishBuild = LocalDateTime.now().plusSeconds(rez);
         System.out.println("The building will be finished at " + finishBuild);
-        return  rez;
+        return rez;
     }
 
     public Flat getOneRoomFlat() {
@@ -112,17 +127,60 @@ public class House {
         this.countThreeRoomFlat = countThreeRoomFlat;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        House house = (House) o;
-        return countOneRoomFlat == house.countOneRoomFlat && countTwoRoomFlat == house.countTwoRoomFlat && countThreeRoomFlat == house.countThreeRoomFlat && Objects.equals(oneRoomFlat, house.oneRoomFlat) && Objects.equals(twoRoomFlat, house.twoRoomFlat) && Objects.equals(threeRoomFlat, house.threeRoomFlat);
+    public String getAddress() {
+        return address;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(oneRoomFlat, countOneRoomFlat, twoRoomFlat, countTwoRoomFlat, threeRoomFlat, countThreeRoomFlat);
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public int getStageQuantity() {
+        return stageQuantity;
+    }
+
+    public void setStageQuantity(int stageQuantity) {
+        this.stageQuantity = stageQuantity;
+    }
+
+    public LocalDateTime getStartBuild() {
+        return startBuild;
+    }
+
+    public void setStartBuild(LocalDateTime startBuild) {
+        this.startBuild = startBuild;
+    }
+
+    public LocalDateTime getFinishBuild() {
+        return finishBuild;
+    }
+
+    public void setFinishBuild(LocalDateTime finishBuild) {
+        this.finishBuild = finishBuild;
+    }
+
+    public Fundament getFundament() {
+        return fundament;
+    }
+
+    public void setFundament(Fundament fundament) {
+        this.fundament = fundament;
+    }
+
+    public Roof getRoof() {
+        return roof;
+    }
+
+    public void setRoof(Roof roof) {
+        this.roof = roof;
     }
 
     @Override
@@ -134,6 +192,41 @@ public class House {
                 ", countTwoRoomFlat=" + countTwoRoomFlat +
                 ", threeRoomFlat=" + threeRoomFlat +
                 ", countThreeRoomFlat=" + countThreeRoomFlat +
+                ", address='" + address + '\'' +
+                ", stage=" + stage +
+                ", stageQuantity=" + stageQuantity +
+                ", startBuild=" + startBuild +
+                ", finishBuild=" + finishBuild +
+                ", address=" + address +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        House house = (House) o;
+        return countOneRoomFlat == house.countOneRoomFlat && countTwoRoomFlat == house.countTwoRoomFlat &&
+                countThreeRoomFlat == house.countThreeRoomFlat && stageQuantity == house.stageQuantity &&
+                Objects.equals(oneRoomFlat, house.oneRoomFlat) && Objects.equals(twoRoomFlat, house.twoRoomFlat) &&
+                Objects.equals(threeRoomFlat, house.threeRoomFlat) && Objects.equals(address, house.address) &&
+                Objects.equals(stage, house.stage);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(oneRoomFlat, countOneRoomFlat, twoRoomFlat,
+                countTwoRoomFlat, threeRoomFlat, countThreeRoomFlat,
+                address, stage, stageQuantity);
+    }
+
+    @Override
+    public void printInfo() {
+        System.out.println(" \n This house situated in " + getAddress() + ". \n Has - " +
+                stageQuantity + " stages; \n- " + stage.getCountOneRoomFlat() * stageQuantity + " OneRoomFlats; \n- " +
+                stage.getCountTwoRoomFlat() * stageQuantity + " TwoRoomFlats; \n- " + stage.getCountThreeRoomFlat() * stageQuantity + " ThreeRoomFlats; " +
+                "\nTotal Area of thr House is - " + houseArea + " m2! ; \nTotal House cost is - " + houseCost +
+                " special units; \nAnd we need - " + timeToBuild + " to build it!");
+
     }
 }

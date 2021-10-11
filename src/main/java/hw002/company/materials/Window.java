@@ -3,8 +3,8 @@ package hw002.company.materials;
 import java.util.Objects;
 
 public class Window {
-    private static final int COST_ONE_METER_WINDOW = 5;
 
+    private static final int COST_ONE_METER_WINDOW = 5;
 
     private double wight;
     private double high;
@@ -14,7 +14,7 @@ public class Window {
         this.high = high;
     }
 
-    public  double costWindow(double wight, double high){
+    public  double costWindowCalc(double wight, double high){
         String rez = String.format("%.2f",wight * high * COST_ONE_METER_WINDOW);
         System.out.println("this Window Cost is " + rez);
         return wight * high * COST_ONE_METER_WINDOW;

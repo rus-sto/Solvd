@@ -1,21 +1,24 @@
 package hw002.company.constructions;
 
 
+import hw002.company.PrintBlock;
+import hw002.company.materials.AreaImpl;
+import hw002.company.materials.CostImpl;
 import hw002.company.materials.Wall;
 import hw002.company.materials.Window;
 
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class Room {
+public class Room extends PrintBlock {
 
-    private static final int COST_ONE_METER_AREA = 4;
-    private static final LocalTime PRODUCE_TIME_FOR_ONE_SQUARE_METER = LocalTime.of(2, 15, 30);
+    private static final LocalTime PRODUCE_TIME_FOR_ONE_SQUARE_METER = LocalTime.of(1, 00, 00);
 
     private Window window;
     private int countWindows;
     private Wall firstWall;
     private Wall secondWall;
+    private double roomSquare;
 
     public Room(Wall firstWall, Wall secondWall, Window window, int countWindows) {
         this.firstWall = firstWall;
@@ -24,28 +27,29 @@ public class Room {
         this.countWindows = countWindows;
     }
 
-    public double areaRoom(double firstWallLength, double secondWallLength) {
-        String rez = String.format("%.2f",firstWallLength * secondWallLength);
-        System.out.println("this room area is " + rez);
-        return firstWallLength * secondWallLength;
+    public double areaRoomCalc(double firstWallLength, double secondWallLength) {
+        AreaImpl roomArea = new AreaImpl(firstWallLength, secondWallLength);
+        double roomSquare = roomArea.countSquare(firstWallLength, secondWallLength);
+//        System.out.println("this room area is " + String.format("%.2f", roomSquare) + "m2!");
+        return roomSquare;
     }
 
-    public double costRoomArea(double areaRoom) {
-        String rez = String.format("%.2f",areaRoom * COST_ONE_METER_AREA);
-        System.out.println("this room area  COST is " + rez);
-        return areaRoom * COST_ONE_METER_AREA;
+    public double costRoomAreaCalc(double areaRoom) {
+        CostImpl roomCost = new CostImpl(areaRoom);
+        double rez = roomCost.costSquareCount(areaRoom);
+//        System.out.println("this roomArea COST is " + String.format("%.2f", rez) + " special units");
+        return rez;
     }
 
-    public double costRoom(double costRoomArea, double costWallA, double costWallB) {
-        String rez = String.format("%.2f",costRoomArea + costWallA + costWallB);
-        System.out.println("this Room Cost is " + rez);
-        return costRoomArea + costWallA + costWallB;
+    public double costRoom(double costRoomAreaCalc, double costWallA, double costWallB) {
+//        System.out.println("this Room Cost is " + String.format("%.2f",costRoomAreaCalc + 2 * costWallA + 2 * costWallB));
+        return costRoomAreaCalc + 2 * costWallA + 2 * costWallB;
     }
 
     public double TotalRoomCost(double costRoom, double costWindow) {
-        String rez = String.format("%.2f",costRoom + costWindow);
-        System.out.println("this Room  Total Cost with window is " + rez);
-        return costRoom + costWindow;
+        String rez = String.format("%.2f", costRoom + costWindow * countWindows);
+        System.out.println("this Room  Total Cost with window is " + rez + " special units");
+        return costRoom + costWindow * countWindows;
     }
 
     public long produceTimeOfRoom(double areaRoom) {
@@ -56,7 +60,7 @@ public class Room {
         int hour = (int) (totalSeconds / 3600 % 24);
         int min = (int) (totalSeconds / 60 % 60);
         int sec = (int) (totalSeconds / 1 % 60);
-        System.out.println(String.format("%s days %s:%s:%s", days, hour, min, sec));
+//        System.out.println(String.format("%s days %s:%s:%s", days, hour, min, sec));
         return totalSeconds;
     }
 
@@ -84,6 +88,14 @@ public class Room {
         this.secondWall = secondWall;
     }
 
+    public double getRoomSquare() {
+        return roomSquare;
+    }
+
+    public void setRoomSquare(double roomSquare) {
+        this.roomSquare = roomSquare;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -105,5 +117,11 @@ public class Room {
                 ", firstWall=" + firstWall +
                 ", secondWall=" + secondWall +
                 '}';
+    }
+
+    @Override
+    public void printInfo() {
+        System.out.println("Each room is made of walls  \n- " + firstWall.getLength() + "m length and \n-" + firstWall.getHigh() + " m high,\n and \n-" +
+                secondWall.getLength() + "m length and \n-" + secondWall.getHigh() + " m high.");
     }
 }
