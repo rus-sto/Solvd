@@ -1,12 +1,13 @@
-package hw002.company.constructions;
+package hw002.company.construction;
 
 import hw002.company.PrintBlock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
+import java.util.Arrays;
 
-public class Stage extends PrintBlock {
+public class Stage implements PrintBlock {
 
     private static final int EXTRA_STAGE_AREA = 15;
     private static final int COST_STAGE_EXTRA_AREA = 50;
@@ -19,6 +20,12 @@ public class Stage extends PrintBlock {
     private int countTwoRoomFlat;
     private Flat threeRoomFlat;
     private int countThreeRoomFlat;
+    private Flat[] flats;
+
+
+    public Stage(Flat[] flats) {
+        this.flats = flats;
+    }
 
     public Stage(Flat oneRoomFlat, int countOneRoomFlat, Flat twoRoomFlat, int countTwoRoomFlat, Flat threeRoomFlat, int countThreeRoomFlat) {
         this.oneRoomFlat = oneRoomFlat;
@@ -39,24 +46,24 @@ public class Stage extends PrintBlock {
         return rez;
     }
 
-    public double totalStageCost(double oneRoomFlatCost, int countOneRoomFlat,
-                                 double twoRoomFlatCost, int countTwoRoomFlat,
-                                 double threeRoomFlatCost, int countThreeRoomFlat) {
+    public double totalStageCostCalc(double oneRoomFlatCost, int countOneRoomFlat,
+                                     double twoRoomFlatCost, int countTwoRoomFlat,
+                                     double threeRoomFlatCost, int countThreeRoomFlat) {
         double rez = oneRoomFlatCost * countOneRoomFlat + twoRoomFlatCost * countTwoRoomFlat +
                 threeRoomFlatCost * countThreeRoomFlat + COST_STAGE_EXTRA_AREA;
         return rez;
     }
 
-    public long produceTimeOfStage(long produceTimeOneRoomFlats, int countOneRoomFlat,
-                                   long produceTimeTwoRoomFlats, int countTwoRoomFlat,
-                                   long produceTimeThreeRoomFlats, int countThreeRoomFlat) {
+    public long produceTimeOfStageCalc(long produceTimeOneRoomFlats, int countOneRoomFlat,
+                                       long produceTimeTwoRoomFlats, int countTwoRoomFlat,
+                                       long produceTimeThreeRoomFlats, int countThreeRoomFlat) {
         long totalFlatExtraSeconds = (long) ((EXTRA_TIME_PRODUCE_FOR_STAGE.getHour() * 3600
                 + EXTRA_TIME_PRODUCE_FOR_STAGE.getMinute() * 60
-                + EXTRA_TIME_PRODUCE_FOR_STAGE.getSecond()) );
+                + EXTRA_TIME_PRODUCE_FOR_STAGE.getSecond()));
         long rez = (produceTimeOneRoomFlats + totalFlatExtraSeconds) * countOneRoomFlat +
                 (produceTimeTwoRoomFlats + totalFlatExtraSeconds) * countTwoRoomFlat +
                 (produceTimeThreeRoomFlats + totalFlatExtraSeconds) * countThreeRoomFlat;
-        return  rez;
+        return rez;
     }
 
     public Flat getOneRoomFlat() {
@@ -107,9 +114,24 @@ public class Stage extends PrintBlock {
         this.countThreeRoomFlat = countThreeRoomFlat;
     }
 
+    public Flat[] getFlats() {
+        return flats;
+    }
+
+    public void setFlats(Flat[] flats) {
+        this.flats = flats;
+    }
+
     @Override
     public void printInfo() {
         LOGGER.debug("Each stage has: \n- " + getCountOneRoomFlat() + " oneRoomFlats; \n- " + getCountTwoRoomFlat() + " twoRoomFlats; \n- "
-        + getCountThreeRoomFlat() + " threeRoomFlats.");
+                + getCountThreeRoomFlat() + " threeRoomFlats.");
+    }
+
+    @Override
+    public String toString() {
+        return "Stage{" +
+                "flats=" + Arrays.toString(flats) +
+                '}';
     }
 }

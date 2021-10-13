@@ -1,13 +1,13 @@
-package hw002.company.constructions;
+package hw002.company.construction;
 
 import hw002.company.PrintBlock;
-import hw002.company.materials.CostImpl;
+import hw002.company.material.CostImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
 
-public class Fundament extends PrintBlock {
+public class Fundament implements PrintBlock {
 
     private static final LocalTime TIME_PRODUCE_FOR_METER_FUNDAMENT = LocalTime.of(1,30,00);
     private static final double COST_FUNDAMENT_COEFFICIENT = 1.5;
@@ -38,7 +38,7 @@ public class Fundament extends PrintBlock {
         return fundamentCostRez;
     }
 
-    public long produceTimeOfFundament(double fundamentSquare) {
+    public long produceTimeOfFundamentCalc(double fundamentSquare) {
         long fundamentSeconds = (long) ((TIME_PRODUCE_FOR_METER_FUNDAMENT.getHour() * 3600
                 + TIME_PRODUCE_FOR_METER_FUNDAMENT.getMinute() * 60
                 + TIME_PRODUCE_FOR_METER_FUNDAMENT.getSecond()));

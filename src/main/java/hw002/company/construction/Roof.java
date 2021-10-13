@@ -1,13 +1,14 @@
-package hw002.company.constructions;
+package hw002.company.construction;
 
 import hw002.company.PrintBlock;
-import hw002.company.materials.CostImpl;
+import hw002.company.material.CostImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
 
-public class Roof extends PrintBlock {
+public class Roof implements PrintBlock {
+
     private static final LocalTime TIME_PRODUCE_FOR_METER_ROOF = LocalTime.of(1,10,00);
     private static final double COST_ROOF_COEFFICIENT = 1.3;
     private static final Logger LOGGER = LogManager.getLogger(Roof.class);
@@ -30,7 +31,7 @@ public class Roof extends PrintBlock {
         return roofCostRez;
     }
 
-    public long produceTimeOfRoof(double roofSquare) {
+    public long produceTimeOfRoofCalc(double roofSquare) {
         long roofSeconds = (long) ((TIME_PRODUCE_FOR_METER_ROOF.getHour() * 3600
                 + TIME_PRODUCE_FOR_METER_ROOF.getMinute() * 60
                 + TIME_PRODUCE_FOR_METER_ROOF.getSecond()));

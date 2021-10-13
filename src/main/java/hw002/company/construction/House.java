@@ -1,7 +1,7 @@
-package hw002.company.constructions;
+package hw002.company.construction;
 
 import hw002.company.PrintBlock;
-import hw002.company.exceptions.StageException;
+import hw002.company.exception.StageException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,16 +9,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class House extends PrintBlock {
-    /**
-     * В площадь зачитывается только этажная площадь , без фундамента и крыши.
-     * В стоимость и во время считается и фундамент и крыша и этажная площадь
-     */
+public class House implements PrintBlock {
 
     private static final int COST_HOUSE_EXTRA_AREA = 50;
     private static final int EXTRA_HOUSE_AREA = 15;
-    private static final int COST_HOUSE_ROOF = 15;
-    private static final int COST_HOUSE_GROUND = 9;
     private static final LocalTime EXTRA_TIME_PRODUCE_FOR_HOUSE = LocalTime.of(20, 00, 00);
     private static final Logger LOGGER = LogManager.getLogger(House.class);
 
@@ -33,9 +27,10 @@ public class House extends PrintBlock {
     private int stageQuantity;
     private double houseArea;
     private double houseCost;
-    private  String timeToBuild;
+    private String timeToBuild;
     private Fundament fundament;
     private Roof roof;
+    private Flat[] flats;
 
     private LocalDateTime startBuild;
     private LocalDateTime finishBuild;
@@ -59,12 +54,12 @@ public class House extends PrintBlock {
 
     public double totalHouseCostCalc(double oneStageCost, int stageQuantity, double fundamentCost, double roofCost) {
         houseCost = oneStageCost * stageQuantity + COST_HOUSE_EXTRA_AREA +
-               fundamentCost + roofCost;
+                fundamentCost + roofCost;
 //        System.out.println("Total COST of THE House  is " + String.format("%.2f", houseCost));
         return houseCost;
     }
 
-    public long produceTimeOfHouse(long produceTimeOfStage, int stageQuantity, long produceTimeOfFundament, long produceTimeOfRoof) {
+    public long produceTimeOfHouseCalc(long produceTimeOfStage, int stageQuantity, long produceTimeOfFundament, long produceTimeOfRoof) {
         startBuild = LocalDateTime.now();
         System.out.println("If we start building - " + startBuild);
         long totalHouseExtraSeconds = (long) ((EXTRA_TIME_PRODUCE_FOR_HOUSE.getHour() * 3600
@@ -152,7 +147,7 @@ public class House extends PrintBlock {
     }
 
     public void setStageQuantity(int stageQuantity) throws StageException {
-        if (stageQuantity <= 0){
+        if (stageQuantity <= 0) {
             throw new StageException("Number of stages must be natural");
         }
         this.stageQuantity = stageQuantity;

@@ -1,4 +1,4 @@
-package hw002.company.materials;
+package hw002.company.material;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,11 +1,11 @@
-package hw002.company.materials;
+package hw002.company.material;
 
-public  class CostImpl implements CostCountable{
+public class CostImpl implements CostCountable {
 
     private static final int COST_ONE_SQUARE_METER = 3;
 
     private double elementSquare;
-    String rez;
+    private String rez;
 
     public CostImpl(double elementSquare) {
         this.elementSquare = elementSquare;
@@ -14,8 +14,6 @@ public  class CostImpl implements CostCountable{
     @Override
     public double costSquareCount(double square) {
         double costCount = square * COST_ONE_SQUARE_METER;
-//        rez = String.format("%.2f", costCount * COST_ONE_SQUARE_METER);
-//        System.out.println("this element COST is " + rez);
         return costCount;
     }
 

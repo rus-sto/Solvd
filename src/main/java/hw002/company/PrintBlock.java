@@ -1,7 +1,7 @@
 package hw002.company;
 
+public interface PrintBlock {
 
-public abstract class PrintBlock {
+    void printInfo();
 
-    public abstract void printInfo();
 }
