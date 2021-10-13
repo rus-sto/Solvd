@@ -1,6 +1,12 @@
 package hw002.house.room;
 
+import hw002.house.House002;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Floor {
+
+    private static final Logger LOGGER = LogManager.getLogger(Floor.class);
 
     private String material;
     private Boolean isHeated;
@@ -12,9 +18,9 @@ public class Floor {
 
     public void turnOn() {
         if (isHeated) {
-            System.out.println("heater is on");
+            LOGGER.debug("heater is on");
         } else {
-            System.out.println("no heater on this floor");
+            LOGGER.debug("no heater on this floor");
         }
     }
 

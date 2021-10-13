@@ -1,6 +1,12 @@
 package hw002.house.sostav;
 
-public  class Element {
+import hw002.house.House002;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class Element {
+
+    private static final Logger LOGGER = LogManager.getLogger(Element.class);
 
     private double length;
     private double height;
@@ -8,6 +14,7 @@ public  class Element {
 
     public Element() {
     }
+
     public Element(double length, double height, String material) {
         this.length = length;
         this.height = height;
@@ -15,8 +22,9 @@ public  class Element {
     }
 
     public void printMaterialInfo() {
-        System.out.println(" this material is " + material + " It's length and height  are - " + length + " - " + height);
+        LOGGER.debug(" this material is " + material + " It's length and height  are - " + length + " - " + height);
     }
+
     public double getLength() {
         return length;
     }

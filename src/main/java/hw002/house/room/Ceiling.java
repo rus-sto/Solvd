@@ -1,10 +1,15 @@
 package hw002.house.room;
 
-import java.util.Locale;
+
+import hw002.house.House002;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Ceiling {
 
-    private boolean isLighted;
+    private static final Logger LOGGER = LogManager.getLogger(Ceiling.class);
+
+    private Boolean isLighted;
     private String color;
 
     public Ceiling(boolean isLighted, String color) {
@@ -13,7 +18,11 @@ public class Ceiling {
     }
 
     public void printCeilInfo() {
-        System.out.println("This ceiling has " + color + " color");
+        LOGGER.debug("This ceiling has " + color + " color");
+    }
+
+    public void printCeilInfo(Boolean isLighted) {
+        LOGGER.debug("This ceiling has " + color + " color ; And It well lighted - " + isLighted);
     }
 
     public boolean isLighted() {

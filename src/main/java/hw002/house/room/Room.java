@@ -1,10 +1,20 @@
 package hw002.house.room;
 
+import hw002.house.House002;
 import hw002.house.sostav.Wall;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Room {
+
+    private static final Logger LOGGER = LogManager.getLogger(Room.class);
+
+
+    private static final LocalTime TIME_PRODUCE_ONE_SQUARE_METER = LocalTime.of(1, 0, 0);
 
     private Wall[] walls;
     private Floor floor;
@@ -26,8 +36,25 @@ public class Room {
         return roomWallsArea;
     }
 
+    public long roomTimeProduceCalc() {
+        long totalSeconds = (long) ((TIME_PRODUCE_ONE_SQUARE_METER.getHour() * 3600
+                + TIME_PRODUCE_ONE_SQUARE_METER.getMinute() * 60
+                + TIME_PRODUCE_ONE_SQUARE_METER.getSecond()) * roomWallsAreaCalc());
+        int days = (int) (totalSeconds / 3600 / 24);
+        int hour = (int) (totalSeconds / 3600 % 24);
+        int min = (int) (totalSeconds / 60 % 60);
+        int sec = (int) (totalSeconds / 1 % 60);
+        LOGGER.debug(String.format("%s days %s:%s:%s", days, hour, min, sec));
+        return totalSeconds;
+    }
+
     public void printRoomInfo() {
-        System.out.println("This room " + roomType + " walls area is " + roomWallsAreaCalc()
+        LOGGER.debug("This room " + roomType + " walls area is " + roomWallsAreaCalc()
+                + " \n It's Floor is " + floor.getMaterial() + " and it's ceiling " + ceiling.getColor());
+    }
+    public void printRoomInfo(String wallMaterial) {
+        LOGGER.debug("This room " + roomType + " walls area is " + roomWallsAreaCalc()
+                + "It's walls material is " + wallMaterial
                 + " \n It's Floor is " + floor.getMaterial() + " and it's ceiling " + ceiling.getColor());
     }
 
@@ -67,11 +94,27 @@ public class Room {
     public String toString() {
         return "\nRoom{" +
                 ", This roomType='" + roomType +
-                ", this room walls area =" + roomWallsAreaCalc() +
-                ", floor=" + floor +
+                ",\n this room walls area =" + roomWallsAreaCalc() +
+                " \nAnd It can be produced for " + roomTimeProduceCalc() + "seconds" +
+                ",\nfloor=" + floor +
                 ", ceiling=" + ceiling +
                 ", \nwalls=" + Arrays.toString(walls) +
                 '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return Arrays.equals(walls, room.walls) && Objects.equals(floor, room.floor) && Objects.equals(ceiling, room.ceiling) && Objects.equals(roomType, room.roomType);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(floor, ceiling, roomType);
+        result = 31 * result + Arrays.hashCode(walls);
+        return result;
     }
 }
