@@ -1,10 +1,11 @@
 package hw002.house.room;
 
-import hw002.house.House002;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Floor {
+import java.util.Objects;
+
+public class Floor implements Heatable {
 
     private static final Logger LOGGER = LogManager.getLogger(Floor.class);
 
@@ -16,6 +17,7 @@ public class Floor {
         this.isHeated = isHeated;
     }
 
+    @Override
     public void turnOn() {
         if (isHeated) {
             LOGGER.debug("heater is on");
@@ -46,5 +48,18 @@ public class Floor {
                 "material='" + material + '\'' +
                 ", isHeated=" + isHeated +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Floor floor = (Floor) o;
+        return Objects.equals(material, floor.material) && Objects.equals(isHeated, floor.isHeated);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(material, isHeated);
     }
 }

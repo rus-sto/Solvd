@@ -1,12 +1,12 @@
 package hw002.house.sostav;
 
-import hw002.house.House002;
+import hw002.house.room.Colorable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
-public class Wall {
+public class Wall implements Colorable {
 
     private static final Logger LOGGER = LogManager.getLogger(Wall.class);
 
@@ -37,6 +37,12 @@ public class Wall {
 
     public void setCountElement(int countElement) {
         this.countElement = countElement;
+    }
+
+    @Override
+    public void toColor() {
+
+        LOGGER.debug("The Wall is colored in nice Color");
     }
 
     @Override

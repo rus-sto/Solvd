@@ -2,9 +2,9 @@ package hw002.house.dom;
 
 public abstract class Conctruction {
 
-    private  String form;
+    private String form;
 
-public abstract void printConstrForm();
+    public abstract void printConstrForm();
 
     public Conctruction(String form) {
         this.form = form;

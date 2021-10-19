@@ -1,12 +1,24 @@
 package hw002.house.dom;
 
-public abstract class Building extends Conctruction {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+
+public abstract class Building extends Conctruction implements Forceable {
+
+    private static final Logger LOGGER = LogManager.getLogger(Building.class);
     private String type;
 
     public Building(String form, String type) {
         super(form);
         this.type = type;
+    }
+
+    @Override
+    public void toForce() {
+
+        LOGGER.debug("This building is well forced");
+
     }
 
     public abstract void printBuildingType();

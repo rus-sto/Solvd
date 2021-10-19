@@ -1,7 +1,9 @@
 package hw002.house;
 
 import hw002.house.dom.House;
-import hw002.house.dom.flat.Flat;
+import hw002.house.flat.Flat;
+import hw002.house.exception.InvalidAddressException;
+import hw002.house.exception.InvalidCountStageException;
 import hw002.house.room.Ceiling;
 import hw002.house.room.Floor;
 import hw002.house.room.Room;
@@ -24,58 +26,78 @@ public class House002 {
 
         LOGGER.debug("Посчитать площадь всех стен в доме, Массивы, Несколько вложенных циклов");
 
-        Element element = new Element(0.2, 0.1, "Brick");
-        Element element2 = new Element(5, 2, "Beton");
-        Element element3 = new Element(6, 2, "Beton");
-        Element element4 = new Element(4, 2, "Beton");
+        Element elementOne = new Element(0.2, 0.1, "Brick");
+        elementOne.printMaterialInfo();
+        Element elementTwo = new Element(5, 2, "Beton");
+        Element elementThree = new Element(6, 2, "Beton");
+        Element elementFour = new Element(4, 2, "Beton");
 
-        Wall wall1 = new Wall(element, 200);
-        Wall wall2 = new Wall(element, 250);
-        Wall wall3 = new Wall(element, 350);
-        Wall wall4 = new Wall(element, 300);
-        Wall[] walls1 = {wall1, wall2, wall3, wall4};
+        Wall wallOne = new Wall(elementOne, 200);
+        wallOne.toColor();
+        Wall wallTwo = new Wall(elementOne, 250);
+        Wall wallThree = new Wall(elementOne, 350);
+        Wall wallFour = new Wall(elementOne, 300);
+        Wall[] wallsArrayOne = {wallOne, wallTwo, wallThree, wallFour};
 
-        Floor floor1 = new Floor("wood", false);
-        Ceiling ceiling1 = new Ceiling(true, "Pink");
-        Room room1 = new Room(walls1, floor1, ceiling1, "Bed-room");
+        Floor floorOne = new Floor("wood", false);
+        floorOne.turnOn();
+        Ceiling ceilingOne = new Ceiling(true, "Pink");
+        Room room1 = new Room(wallsArrayOne, floorOne, ceilingOne, "Bed-room");
 
-        Wall wall5 = new Wall(element2, 1);
-        Wall wall6 = new Wall(element3, 1);
-        Wall wall7 = new Wall(element4, 2);
-        Wall[] walls2 = {wall5, wall6, wall7};
+        Wall wallFive = new Wall(elementTwo, 1);
+        Wall wallSix = new Wall(elementThree, 1);
+        Wall wallSeven = new Wall(elementFour, 2);
+        Wall[] wallsArrayTwo = {wallFive, wallSix, wallSeven};
 
-        Floor floor2 = new Floor("Laminat", true);
-        Ceiling ceiling2 = new Ceiling(true, "white");
-        Room room2 = new Room(walls2, floor2, ceiling2, "Living-room");
+        Floor floorTwo = new Floor("Laminat", true);
+        Ceiling ceilingTwo = new Ceiling(true, "white");
+        ceilingTwo.toColor();
+        Room roomTwo = new Room(wallsArrayTwo, floorTwo, ceilingTwo, "Living-room");
+        LOGGER.debug(roomTwo.toPaint());
 
-        Room[] rooms = {room1, room2};
-        Flat flat1 = new Flat(rooms, "Green");
+        Room[] roomsArrayOne = {room1, roomTwo};
+        Flat flatOne = new Flat(roomsArrayOne, "Green");
 
-        Wall wall8 = new Wall(element, 1000);
-        Wall wall9 = new Wall(element4, 2);
-        Wall[] walls3 = {wall8, wall9};
+        Wall wallEight = new Wall(elementOne, 1000);
+        Wall wallNine = new Wall(elementFour, 2);
+        Wall[] wallsArrayThree = {wallEight, wallNine};
 
-        Floor floor3 = new Floor("Lenoleum", false);
-        Ceiling ceiling3 = new Ceiling(true, "Yellow");
-        Room room3 = new Room(walls3, floor3, ceiling3, "Dinning-room");
+        Floor floorThree = new Floor("Lenoleum", false);
+        Ceiling ceilingThree = new Ceiling(true, "Yellow");
+        Room room3 = new Room(wallsArrayThree, floorThree, ceilingThree, "Dinning-room");
 
-        Room[] rooms2 = {room3};
-        Flat flat2 = new Flat(rooms2, "Brown");
+        Room[] roomsArrayTwo = {room3};
+        Flat flatTwo = new Flat(roomsArrayTwo, "Brown");
 
-        Flat[] flats = {flat1, flat2};
+        Flat[] flatsArrayOne = {flatOne, flatTwo};
 
-        Stage stage = new Stage(flats, true);
+        Stage stage = new Stage(flatsArrayOne, true);
+        LOGGER.debug(stage.toPaint());
 
-        House house = new House("Round", "Liveable", stage, 2, "Minsk, Center");
+        House house = null;
+        try {
+            house = new House("Round", "Liveable", stage, 1, "Minsk, Center");
+        } catch (InvalidCountStageException | InvalidAddressException e) {
+            LOGGER.debug("Incorrect number of (count)Stages or Address name.  " + e.getLocalizedMessage(), e);
+        } catch (Exception e) {
+            LOGGER.debug("Other exception");
+        } finally {
+            LOGGER.debug("End of setting the house");
+        }
+        try (ConnectionResource resource = new ConnectionResource()) {
+            LOGGER.debug("Do smth in 'try block'");
+        }
+
+        assert house != null;
         LOGGER.debug(house.toString());
 
         LOGGER.debug(" ");
         room1.printRoomInfo();
-        room2.printRoomInfo(element.getMaterial());
+        roomTwo.printRoomInfo(elementOne.getMaterial());
 
         LOGGER.debug(" ");
-        ceiling1.printCeilInfo();
-        ceiling2.printCeilInfo(true);
+        ceilingOne.printCeilInfo();
+        ceilingTwo.printCeilInfo(true);
 
     }
 }

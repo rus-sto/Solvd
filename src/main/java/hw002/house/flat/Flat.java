@@ -1,6 +1,6 @@
-package hw002.house.dom.flat;
+package hw002.house.flat;
 
-import hw002.house.House002;
+import hw002.house.Electrisized;
 import hw002.house.room.Room;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Flat {
+public class Flat implements Electrisized {
 
     private static final Logger LOGGER = LogManager.getLogger(Flat.class);
 
@@ -61,6 +61,13 @@ public class Flat {
                 "\nIt has " + rooms.length + " rooms " +
                 "\n,rooms=" + Arrays.toString(rooms) +
                 '}';
+    }
+
+    @Override
+    public String toElectrisize() {
+        String elecrto = "We have electricity in this flat";
+        LOGGER.debug(elecrto);
+        return elecrto;
     }
 
     @Override

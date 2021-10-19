@@ -1,6 +1,6 @@
 package hw002.house.room;
 
-import hw002.house.House002;
+import hw002.house.Paintable;
 import hw002.house.sostav.Wall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,11 +9,9 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Room {
+public class Room implements Paintable {
 
     private static final Logger LOGGER = LogManager.getLogger(Room.class);
-
-
     private static final LocalTime TIME_PRODUCE_ONE_SQUARE_METER = LocalTime.of(1, 0, 0);
 
     private Wall[] walls;
@@ -52,6 +50,7 @@ public class Room {
         LOGGER.debug("This room " + roomType + " walls area is " + roomWallsAreaCalc()
                 + " \n It's Floor is " + floor.getMaterial() + " and it's ceiling " + ceiling.getColor());
     }
+
     public void printRoomInfo(String wallMaterial) {
         LOGGER.debug("This room " + roomType + " walls area is " + roomWallsAreaCalc()
                 + "It's walls material is " + wallMaterial
@@ -101,6 +100,11 @@ public class Room {
                 ", \nwalls=" + Arrays.toString(walls) +
                 '\'' +
                 '}';
+    }
+
+    @Override
+    public String toPaint() {
+        return "Room is nice colored";
     }
 
     @Override

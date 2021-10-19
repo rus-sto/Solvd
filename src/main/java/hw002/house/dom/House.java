@@ -1,7 +1,7 @@
 package hw002.house.dom;
 
-
-import hw002.house.House002;
+import hw002.house.exception.InvalidAddressException;
+import hw002.house.exception.InvalidCountStageException;
 import hw002.house.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,16 +13,26 @@ public class House extends Building {
 
     private static final Logger LOGGER = LogManager.getLogger(House.class);
 
+    static {
+        LOGGER.debug("New house has been created");
+    }
+
     private Stage stage;
     private int countStages;
     private String address;
     private LocalDateTime startBuild;
     private LocalDateTime finishBuild;
 
-    public House(String form, String type, Stage stage, int countStages, String address) {
+    public House(String form, String type, Stage stage, int countStages, String address) throws InvalidCountStageException, InvalidAddressException {
         super(form, type);
         this.stage = stage;
+        if (countStages <= 0) {
+            throw new InvalidCountStageException("Count of stages must be natural");
+        }
         this.countStages = countStages;
+        if (address.contains("_")) {
+            throw new InvalidAddressException("Address cannot contain '_' symbol");
+        }
         this.address = address;
     }
 
@@ -69,7 +79,10 @@ public class House extends Building {
         return countStages;
     }
 
-    public void setCountStages(int countStages) {
+    public void setCountStages(int countStages) throws InvalidCountStageException {
+        if (countStages <= 0) {
+            throw new InvalidCountStageException("Count of stages must be natural");
+        }
         this.countStages = countStages;
     }
 
@@ -77,7 +90,10 @@ public class House extends Building {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address) throws InvalidAddressException {
+        if (address.contains("_")) {
+            throw new InvalidAddressException("Address cannot contain '_' symbol");
+        }
         this.address = address;
     }
 

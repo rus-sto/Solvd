@@ -1,11 +1,11 @@
 package hw002.house.room;
 
-
-import hw002.house.House002;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Ceiling {
+import java.util.Objects;
+
+public class Ceiling implements Colorable {
 
     private static final Logger LOGGER = LogManager.getLogger(Ceiling.class);
 
@@ -19,6 +19,11 @@ public class Ceiling {
 
     public void printCeilInfo() {
         LOGGER.debug("This ceiling has " + color + " color");
+    }
+
+    @Override
+    public void toColor() {
+        LOGGER.debug("The ceiling is colored in " + color + "  Color");
     }
 
     public void printCeilInfo(Boolean isLighted) {
@@ -47,5 +52,18 @@ public class Ceiling {
                 "isLighted=" + isLighted +
                 ", color='" + color + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ceiling ceiling = (Ceiling) o;
+        return Objects.equals(isLighted, ceiling.isLighted) && Objects.equals(color, ceiling.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isLighted, color);
     }
 }
