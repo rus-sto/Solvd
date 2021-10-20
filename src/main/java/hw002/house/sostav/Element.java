@@ -5,20 +5,22 @@ import hw002.house.exception.MaterialInvalidException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 import java.util.Objects;
 
-public class Element {
+public class Element<T> {
 
     private static final Logger LOGGER = LogManager.getLogger(Element.class);
 
     private double length;
     private double height;
     private String material;
+    private T gost;
 
     public Element() {
     }
 
-    public Element(double length, double height, String material) {
+    public Element(double length, double height, String material, T gost) {
         this.length = length;
         if (height < 0.1 || height > 5) {
             throw new ElementHeightException("Impossible height");
@@ -28,6 +30,7 @@ public class Element {
             throw new MaterialInvalidException("Material is invalid");
         }
         this.material = material;
+        this.gost = gost;
     }
 
     public void printMaterialInfo() {
@@ -53,6 +56,14 @@ public class Element {
         this.height = height;
     }
 
+    public T getGost() {
+        return gost;
+    }
+
+    public void setGost(T gost) {
+        this.gost = gost;
+    }
+
     public String getMaterial() {
         return material;
     }
@@ -66,7 +77,7 @@ public class Element {
 
     @Override
     public String toString() {
-        return "Element{" +
+        return "This Element" +
                 "length=" + length +
                 ", height=" + height +
                 ", material='" + material + '\'' +

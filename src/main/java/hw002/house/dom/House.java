@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class House extends Building {
+public class House<T> extends Building {
 
     private static final Logger LOGGER = LogManager.getLogger(House.class);
 
@@ -22,8 +22,9 @@ public class House extends Building {
     private String address;
     private LocalDateTime startBuild;
     private LocalDateTime finishBuild;
+    private T hasFurniture;
 
-    public House(String form, String type, Stage stage, int countStages, String address) throws InvalidCountStageException, InvalidAddressException {
+    public House(String form, String type, Stage stage, int countStages, String address,T hasFurniture) throws InvalidCountStageException, InvalidAddressException {
         super(form, type);
         this.stage = stage;
         if (countStages <= 0) {
@@ -34,6 +35,7 @@ public class House extends Building {
             throw new InvalidAddressException("Address cannot contain '_' symbol");
         }
         this.address = address;
+        this.hasFurniture = hasFurniture;
     }
 
     public double houseWallsAreaCalc() {
@@ -100,12 +102,10 @@ public class House extends Building {
     @Override
     public String toString() {
         return "\n\n        -----       -----        ----           " +
-                "\nThis House's{" +
-                " address is " + address + '\'' +
+                "\nThis House's address is " + address + '\'' +
                 ",\n It has " + countStages + " Stages," +
                 "\nThis house walls Total area is " + houseWallsAreaCalc() + "m2" +
-                "\n Building time - " + houseTimeProduceCalc() +
-                "\nstage=" + stage +
+                "\n Building time - " + houseTimeProduceCalc() + " sek" +
                 '}';
     }
 

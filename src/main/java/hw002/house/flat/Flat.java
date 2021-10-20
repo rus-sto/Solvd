@@ -5,17 +5,17 @@ import hw002.house.room.Room;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
-public class Flat implements Electrisized {
+public class Flat<T> implements Electrisized {
 
     private static final Logger LOGGER = LogManager.getLogger(Flat.class);
 
-    private Room[] rooms;
-    private String color;
+    private List<Room> rooms;
+    private T color;
 
-    public Flat(Room[] rooms, String color) {
+    public Flat(List<Room> rooms, T color) {
         this.rooms = rooms;
         this.color = color;
     }
@@ -36,37 +36,36 @@ public class Flat implements Electrisized {
         return flatTimeProduce;
     }
 
-    public Room[] getRooms() {
+    public List<Room> getRooms() {
         return rooms;
     }
 
-    public void setRooms(Room[] rooms) {
+    public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
 
-    public String getColor() {
+    public T getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(T color) {
         this.color = color;
     }
 
     @Override
     public String toString() {
-        return "\n\n        -----       -----        ----           " +
-                "\nFlat{" +
-                "Flats color='" + color + '\'' +
+        return "\n\n  " +
+                "\nThis Flat's color='" + color + '\'' +
                 "\nThis flat walls area is - " + flatWallsAreaCalc() + "m2" +
                 "\nAnd it can be produced for " + flatTimeProduceCalc() + "seconds" +
-                "\nIt has " + rooms.length + " rooms " +
-                "\n,rooms=" + Arrays.toString(rooms) +
+                "\nIt has " + rooms.size() + " rooms " +
+                "\n,rooms=" + rooms.toString() +
                 '}';
     }
 
     @Override
     public String toElectrisize() {
-        String elecrto = "We have electricity in this flat";
+        String elecrto = "\n\nWe do have electricity in this flat";
         LOGGER.debug(elecrto);
         return elecrto;
     }
@@ -76,13 +75,11 @@ public class Flat implements Electrisized {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Flat flat = (Flat) o;
-        return Arrays.equals(rooms, flat.rooms) && Objects.equals(color, flat.color);
+        return Objects.equals(rooms, flat.rooms);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(color);
-        result = 31 * result + Arrays.hashCode(rooms);
-        return result;
+        return Objects.hash(rooms);
     }
 }

@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Room implements Paintable {
@@ -15,13 +15,13 @@ public class Room implements Paintable {
 
     private static final LocalTime TIME_PRODUCE_ONE_SQUARE_METER = LocalTime.of(1, 0, 0);
 
-    private Wall[] walls;
+    private List<Wall> wallsList;
     private Floor floor;
     private Ceiling ceiling;
     private String roomType;
 
-    public Room(Wall[] walls, Floor floor, Ceiling ceiling, String roomType) {
-        this.walls = walls;
+    public Room(List<Wall> wallsList, Floor floor, Ceiling ceiling, String roomType) {
+        this.wallsList = wallsList;
         this.floor = floor;
         this.ceiling = ceiling;
         this.roomType = roomType;
@@ -29,7 +29,7 @@ public class Room implements Paintable {
 
     public double roomWallsAreaCalc() {
         double roomWallsArea = 0;
-        for (Wall wall : walls) {
+        for (Wall wall : wallsList) {
             roomWallsArea += wall.wallAreaCalc();
         }
         return roomWallsArea;
@@ -48,22 +48,22 @@ public class Room implements Paintable {
     }
 
     public void printRoomInfo() {
-        LOGGER.debug("This room " + roomType + " walls area is " + roomWallsAreaCalc()
+        LOGGER.debug("\n\nThis room " + roomType + " walls area is " + roomWallsAreaCalc()
                 + " \n It's Floor is " + floor.getMaterial() + " and it's ceiling " + ceiling.getColor());
     }
 
     public void printRoomInfo(String wallMaterial) {
-        LOGGER.debug("This room " + roomType + " walls area is " + roomWallsAreaCalc()
+        LOGGER.debug("\n\nThis room " + roomType + " walls area is " + roomWallsAreaCalc()
                 + "It's walls material is " + wallMaterial
                 + " \n It's Floor is " + floor.getMaterial() + " and it's ceiling " + ceiling.getColor());
     }
 
-    public Wall[] getWalls() {
-        return walls;
+    public List<Wall> getWallsList() {
+        return wallsList;
     }
 
-    public void setWalls(Wall[] walls) {
-        this.walls = walls;
+    public void setWallsList(List<Wall> wallsList) {
+        this.wallsList = wallsList;
     }
 
     public Floor getFloor() {
@@ -92,21 +92,20 @@ public class Room implements Paintable {
 
     @Override
     public String toString() {
-        return "\n\n        -----       -----        ----           " +
-                "\nRoom{" +
-                ", This roomType='" + roomType +
+        return "\n\n " +
+                "\nThis roomType='" + roomType +
                 ",\n this room walls area =" + roomWallsAreaCalc() +
-                " \nAnd It can be produced for " + roomTimeProduceCalc() + "seconds" +
+                " \nAnd It can be produced for " + roomTimeProduceCalc() + " sec" +
                 ",\nfloor=" + floor +
                 ", ceiling=" + ceiling +
-                ", \nwalls=" + Arrays.toString(walls) +
+                ", \nwalls=" + wallsList.toString() +
                 '\'' +
                 '}';
     }
 
     @Override
     public String toPaint() {
-        return "Room is nice colored";
+        return "\n\nRoom is nice colored";
     }
 
     @Override
@@ -114,13 +113,11 @@ public class Room implements Paintable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return Arrays.equals(walls, room.walls) && Objects.equals(roomType, room.roomType);
+        return Objects.equals(wallsList, room.wallsList) && Objects.equals(roomType, room.roomType);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(roomType);
-        result = 31 * result + Arrays.hashCode(walls);
-        return result;
+        return Objects.hash(wallsList, roomType);
     }
 }

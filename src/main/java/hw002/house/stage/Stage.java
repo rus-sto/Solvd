@@ -5,17 +5,17 @@ import hw002.house.flat.Flat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Stage implements Paintable {
 
     private static final Logger LOGGER = LogManager.getLogger(Stage.class);
 
-    private Flat[] flats;
+    private List<Flat<?>> flats;
     private Boolean isPainted;
 
-    public Stage(Flat[] flats, Boolean isPainted) {
+    public Stage(List<Flat<?>> flats, Boolean isPainted) {
         this.flats = flats;
         this.isPainted = isPainted;
     }
@@ -41,11 +41,11 @@ public class Stage implements Paintable {
     }
 
 
-    public Flat[] getFlats() {
+    public List<Flat<?>> getFlats() {
         return flats;
     }
 
-    public void setFlats(Flat[] flats) {
+    public void setFlats(List<Flat<?>> flats) {
         this.flats = flats;
     }
 
@@ -59,11 +59,9 @@ public class Stage implements Paintable {
 
     @Override
     public String toString() {
-        return "\n\nStage{" +
-                "This stage has " + flats.length + " flats " +
-                "It has " + flats.length + " flats " +
+        return "\n\nThis stage has " + flats.size() + " flats " +
                 "\n And It can be produced for " + stageTimeProduceCalc() + " sec " +
-                "\nflats=" + Arrays.toString(flats) +
+                "\nflats=" + flats.toString() +
                 ", isPainted=" + isPainted +
                 '}';
     }
@@ -71,9 +69,9 @@ public class Stage implements Paintable {
     @Override
     public String toPaint() {
         if (isPainted) {
-            return "the stage is already painted";
+            return "     ----  the stage is already painted";
         } else {
-            return "the stage can be painted in any color";
+            return "     ----  the stage can be painted in any color";
         }
     }
 
@@ -82,11 +80,11 @@ public class Stage implements Paintable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Stage stage = (Stage) o;
-        return Arrays.equals(flats, stage.flats);
+        return Objects.equals(flats, stage.flats) && Objects.equals(isPainted, stage.isPainted);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(flats);
+        return Objects.hash(flats, isPainted);
     }
 }
