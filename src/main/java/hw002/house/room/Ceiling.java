@@ -9,11 +9,11 @@ public class Ceiling implements Colorable {
 
     private static final Logger LOGGER = LogManager.getLogger(Ceiling.class);
 
-    private Boolean isLighted;
+    private Boolean hasLight;
     private String color;
 
-    public Ceiling(boolean isLighted, String color) {
-        this.isLighted = isLighted;
+    public Ceiling(boolean hasLight, String color) {
+        this.hasLight = hasLight;
         this.color = color;
     }
 
@@ -31,11 +31,11 @@ public class Ceiling implements Colorable {
     }
 
     public boolean isLighted() {
-        return isLighted;
+        return hasLight;
     }
 
     public void setLighted(boolean lighted) {
-        isLighted = lighted;
+        hasLight = lighted;
     }
 
     public String getColor() {
@@ -49,7 +49,7 @@ public class Ceiling implements Colorable {
     @Override
     public String toString() {
         return "Ceiling{" +
-                "isLighted=" + isLighted +
+                "isLighted=" + hasLight +
                 ", color='" + color + '\'' +
                 '}';
     }
@@ -59,11 +59,11 @@ public class Ceiling implements Colorable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ceiling ceiling = (Ceiling) o;
-        return Objects.equals(isLighted, ceiling.isLighted) && Objects.equals(color, ceiling.color);
+        return Objects.equals(hasLight, ceiling.hasLight) && Objects.equals(color, ceiling.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isLighted, color);
+        return Objects.hash(hasLight, color);
     }
 }

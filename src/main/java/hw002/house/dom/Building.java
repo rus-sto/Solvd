@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 public abstract class Building extends Conctruction implements Forceable {
 
     private static final Logger LOGGER = LogManager.getLogger(Building.class);
+
     private String type;
 
     public Building(String form, String type) {

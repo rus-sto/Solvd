@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Room implements Paintable {
 
     private static final Logger LOGGER = LogManager.getLogger(Room.class);
+
     private static final LocalTime TIME_PRODUCE_ONE_SQUARE_METER = LocalTime.of(1, 0, 0);
 
     private Wall[] walls;

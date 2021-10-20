@@ -10,16 +10,16 @@ public class Floor implements Heatable {
     private static final Logger LOGGER = LogManager.getLogger(Floor.class);
 
     private String material;
-    private Boolean isHeated;
+    private Boolean hasHeat;
 
-    public Floor(String material, Boolean isHeated) {
+    public Floor(String material, Boolean hasHeat) {
         this.material = material;
-        this.isHeated = isHeated;
+        this.hasHeat = hasHeat;
     }
 
     @Override
     public void turnOn() {
-        if (isHeated) {
+        if (hasHeat) {
             LOGGER.debug("heater is on");
         } else {
             LOGGER.debug("no heater on this floor");
@@ -35,18 +35,18 @@ public class Floor implements Heatable {
     }
 
     public Boolean getHeated() {
-        return isHeated;
+        return hasHeat;
     }
 
     public void setHeated(Boolean heated) {
-        isHeated = heated;
+        hasHeat = heated;
     }
 
     @Override
     public String toString() {
         return "Floor{" +
                 "material='" + material + '\'' +
-                ", isHeated=" + isHeated +
+                ", isHeated=" + hasHeat +
                 '}';
     }
 
@@ -55,11 +55,11 @@ public class Floor implements Heatable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Floor floor = (Floor) o;
-        return Objects.equals(material, floor.material) && Objects.equals(isHeated, floor.isHeated);
+        return Objects.equals(material, floor.material) && Objects.equals(hasHeat, floor.hasHeat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(material, isHeated);
+        return Objects.hash(material, hasHeat);
     }
 }

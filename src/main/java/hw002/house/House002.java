@@ -26,6 +26,7 @@ public class House002 {
 
         LOGGER.debug("Посчитать площадь всех стен в доме, Массивы, Несколько вложенных циклов");
 
+        System.out.println("Hreynj");
         Element elementOne = new Element(0.2, 0.1, "Brick");
         elementOne.printMaterialInfo();
         Element elementTwo = new Element(5, 2, "Beton");
@@ -73,6 +74,11 @@ public class House002 {
 
         Stage stage = new Stage(flatsArrayOne, true);
         LOGGER.debug(stage.toPaint());
+
+        LOGGER.debug("Polymorphism is here");
+        Polymorphism test = new Polymorphism();
+        test.floorHeating(floorThree,floorThree.getHeated());
+        test.floorHeating(floorTwo, floorTwo.getHeated());
 
         House house = null;
         try {
