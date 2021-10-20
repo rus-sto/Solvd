@@ -82,13 +82,11 @@ public class Stage implements Paintable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Stage stage = (Stage) o;
-        return Arrays.equals(flats, stage.flats) && Objects.equals(isPainted, stage.isPainted);
+        return Arrays.equals(flats, stage.flats);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(isPainted);
-        result = 31 * result + Arrays.hashCode(flats);
-        return result;
+        return Arrays.hashCode(flats);
     }
 }

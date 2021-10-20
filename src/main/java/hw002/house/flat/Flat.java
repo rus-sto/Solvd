@@ -54,7 +54,8 @@ public class Flat implements Electrisized {
 
     @Override
     public String toString() {
-        return "\n\nFlat{" +
+        return "\n\n        -----       -----        ----           " +
+                "\nFlat{" +
                 "Flats color='" + color + '\'' +
                 "\nThis flat walls area is - " + flatWallsAreaCalc() + "m2" +
                 "\nAnd it can be produced for " + flatTimeProduceCalc() + "seconds" +

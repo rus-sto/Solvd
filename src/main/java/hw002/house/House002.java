@@ -40,6 +40,8 @@ public class House002 {
         Wall wallFour = new Wall(elementOne, 300);
         Wall[] wallsArrayOne = {wallOne, wallTwo, wallThree, wallFour};
 
+        LOGGER.debug("        -----       -----        ----           ");
+
         Floor floorOne = new Floor("wood", false);
         floorOne.turnOn();
         Ceiling ceilingOne = new Ceiling(true, "Pink");
@@ -59,6 +61,8 @@ public class House002 {
         Room[] roomsArrayOne = {room1, roomTwo};
         Flat flatOne = new Flat(roomsArrayOne, "Green");
 
+        LOGGER.debug("        -----       -----        ----           ");
+
         Wall wallEight = new Wall(elementOne, 1000);
         Wall wallNine = new Wall(elementFour, 2);
         Wall[] wallsArrayThree = {wallEight, wallNine};
@@ -77,8 +81,12 @@ public class House002 {
 
         LOGGER.debug("Polymorphism is here");
         Polymorphism test = new Polymorphism();
-        test.floorHeating(floorThree,floorThree.getHeated());
+        LOGGER.debug("floorThree" + floorThree.toString());
+        test.floorHeating(floorThree, floorThree.getHeated());
+        LOGGER.debug("floorTwo" + floorTwo.toString());
         test.floorHeating(floorTwo, floorTwo.getHeated());
+
+        LOGGER.debug("        -----       -----        ----           ");
 
         House house = null;
         try {
@@ -94,8 +102,12 @@ public class House002 {
             LOGGER.debug("Do smth in 'try block'");
         }
 
+        LOGGER.debug("        -----       -----        ----           ");
+
         assert house != null;
         LOGGER.debug(house.toString());
+
+        LOGGER.debug("        -----       -----        ----           ");
 
         LOGGER.debug(" ");
         room1.printRoomInfo();

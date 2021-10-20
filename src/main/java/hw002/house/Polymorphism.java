@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Polymorphism {
 
-    private  static final Logger LOGGER = LogManager.getLogger(Polymorphism.class);
+    private static final Logger LOGGER = LogManager.getLogger(Polymorphism.class);
 
     public void floorHeating(Heatable heat, Boolean hasHeat) {
         if (hasHeat) {

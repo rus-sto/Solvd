@@ -92,7 +92,8 @@ public class Room implements Paintable {
 
     @Override
     public String toString() {
-        return "\nRoom{" +
+        return "\n\n        -----       -----        ----           " +
+                "\nRoom{" +
                 ", This roomType='" + roomType +
                 ",\n this room walls area =" + roomWallsAreaCalc() +
                 " \nAnd It can be produced for " + roomTimeProduceCalc() + "seconds" +
@@ -113,12 +114,12 @@ public class Room implements Paintable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return Arrays.equals(walls, room.walls) && Objects.equals(floor, room.floor) && Objects.equals(ceiling, room.ceiling) && Objects.equals(roomType, room.roomType);
+        return Arrays.equals(walls, room.walls) && Objects.equals(roomType, room.roomType);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(floor, ceiling, roomType);
+        int result = Objects.hash(roomType);
         result = 31 * result + Arrays.hashCode(walls);
         return result;
     }

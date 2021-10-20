@@ -99,7 +99,8 @@ public class House extends Building {
 
     @Override
     public String toString() {
-        return "\n\nThis House's{" +
+        return "\n\n        -----       -----        ----           " +
+                "\nThis House's{" +
                 " address is " + address + '\'' +
                 ",\n It has " + countStages + " Stages," +
                 "\nThis house walls Total area is " + houseWallsAreaCalc() + "m2" +
@@ -113,11 +114,13 @@ public class House extends Building {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         House house = (House) o;
-        return countStages == house.countStages && Objects.equals(stage, house.stage) && Objects.equals(address, house.address) && Objects.equals(startBuild, house.startBuild) && Objects.equals(finishBuild, house.finishBuild);
+        return countStages == house.countStages
+                && Objects.equals(stage, house.stage)
+                && Objects.equals(address, house.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(stage, countStages, address, startBuild, finishBuild);
+        return Objects.hash(stage, countStages, address);
     }
 }
