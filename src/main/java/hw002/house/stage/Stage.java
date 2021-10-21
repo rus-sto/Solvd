@@ -26,7 +26,7 @@ public class Stage implements Paintable {
 
     public double stageWallsAreaCalc() {
         double stageWallsArea = 0;
-        for (Flat flat : flats) {
+        for (Flat<?> flat : flats) {
             stageWallsArea += flat.flatWallsAreaCalc();
         }
         return stageWallsArea;
@@ -34,7 +34,7 @@ public class Stage implements Paintable {
 
     public double stageTimeProduceCalc() {
         double stageTimeProduce = 0;
-        for (Flat flat : flats) {
+        for (Flat<?> flat : flats) {
             stageTimeProduce += flat.flatTimeProduceCalc();
         }
         return stageTimeProduce;

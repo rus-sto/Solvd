@@ -44,12 +44,12 @@ public class House002 {
         elementColorMap.put(elementFour.getMaterial(), "Black");
         System.out.println("\n\nelementColorMap \n " + elementColorMap + "\n");
 
-        List<Element<?>> elementList = new ArrayList<>();
-        elementList.add(elementOne);
-        elementList.add(elementTwo);
-        elementList.add(elementThree);
-        elementList.add(elementFour);
-        LOGGER.debug(elementList + "\n");
+        List<Element<?>> elements = new ArrayList<>();
+        elements.add(elementOne);
+        elements.add(elementTwo);
+        elements.add(elementThree);
+        elements.add(elementFour);
+        LOGGER.debug(elements + "\n");
 
         Wall wallOne = new Wall(elementOne, 200);
         Wall wallTwo = new Wall(elementOne, 250);
@@ -57,67 +57,67 @@ public class House002 {
         Wall wallFour = new Wall(elementOne, 300);
         wallOne.toColor();
 
-        List<Wall> wallsListOne = new ArrayList<>();
-        wallsListOne.add(wallOne);
-        wallsListOne.add(wallTwo);
-        wallsListOne.add(wallThree);
-        wallsListOne.add(wallFour);
+        List<Wall> wallsOne = new ArrayList<>();
+        wallsOne.add(wallOne);
+        wallsOne.add(wallTwo);
+        wallsOne.add(wallThree);
+        wallsOne.add(wallFour);
 
         LOGGER.debug("\n");
 
         Floor floorOne = new Floor("wood", false);
         floorOne.turnOn();
         Ceiling ceilingOne = new Ceiling(true, "Pink");
-        Room roomOne = new Room(wallsListOne, floorOne, ceilingOne, "Bed-room");
+        Room roomOne = new Room(wallsOne, floorOne, ceilingOne, "Bed-room");
 
         Wall wallFive = new Wall(elementTwo, 1);
         Wall wallSix = new Wall(elementThree, 1);
         Wall wallSeven = new Wall(elementFour, 2);
 
-        List<Wall> wallsListTwo = new ArrayList<>();
-        wallsListTwo.add(wallFive);
-        wallsListTwo.add(wallSix);
-        wallsListTwo.add(wallSeven);
+        List<Wall> wallsTwo = new ArrayList<>();
+        wallsTwo.add(wallFive);
+        wallsTwo.add(wallSix);
+        wallsTwo.add(wallSeven);
 
         Floor floorTwo = new Floor("Laminat", true);
         Ceiling ceilingTwo = new Ceiling(true, "white");
         ceilingTwo.toColor();
-        Room roomTwo = new Room(wallsListTwo, floorTwo, ceilingTwo, "Living-room");
+        Room roomTwo = new Room(wallsTwo, floorTwo, ceilingTwo, "Living-room");
         LOGGER.debug(roomTwo.toPaint());
 
-        List<Room> roomsListOne = new ArrayList<>();
-        roomsListOne.add(roomOne);
-        roomsListOne.add(roomTwo);
+        List<Room> roomsOne = new ArrayList<>();
+        roomsOne.add(roomOne);
+        roomsOne.add(roomTwo);
 
-        Flat<String> flatOne = new Flat<>(roomsListOne, "Green");
+        Flat<String> flatOne = new Flat<>(roomsOne, "Green");
 
         LOGGER.debug("\n\n");
 
         Wall wallEight = new Wall(elementOne, 1000);
         Wall wallNine = new Wall(elementFour, 2);
-        List<Wall> wallsListThree = new ArrayList<>();
-        wallsListThree.add(wallEight);
-        wallsListThree.add(wallNine);
+        List<Wall> wallsThree = new ArrayList<>();
+        wallsThree.add(wallEight);
+        wallsThree.add(wallNine);
 
         Floor floorThree = new Floor("Lenoleum", false);
         Ceiling ceilingThree = new Ceiling(true, "Yellow");
-        Room room3 = new Room(wallsListThree, floorThree, ceilingThree, "Dinning-room");
+        Room room3 = new Room(wallsThree, floorThree, ceilingThree, "Dinning-room");
 
-        List<Room> roomsListTwo = new ArrayList<>();
-        roomsListTwo.add(room3);
-        Flat<String> flatTwo = new Flat<>(roomsListTwo, "Brown");
+        List<Room> roomsTwo = new ArrayList<>();
+        roomsTwo.add(room3);
+        Flat<String> flatTwo = new Flat<>(roomsTwo, "Brown");
 
-        List<Flat<?>> flatsListOne = new ArrayList<>();
-        flatsListOne.add(flatOne);
-        flatsListOne.add(flatTwo);
+        List<Flat<?>> flatsOne = new ArrayList<>();
+        flatsOne.add(flatOne);
+        flatsOne.add(flatTwo);
 
-        Map<Flat<String>, List<Room>> flatRoomMap = new HashMap<>();
-        flatRoomMap.put(flatOne, roomsListOne);
-        flatRoomMap.put(flatTwo, roomsListTwo);
-        LOGGER.debug("\n\n flatRoomMap\n" + flatRoomMap);
+        Map<Flat<String>, List<Room>> flatRooms = new HashMap<>();
+        flatRooms.put(flatOne, roomsOne);
+        flatRooms.put(flatTwo, roomsTwo);
+        LOGGER.debug("\n\n flatRooms\n" + flatRooms);
 
 
-        Stage stage = new Stage(flatsListOne, true);
+        Stage stage = new Stage(flatsOne, true);
         LOGGER.debug(stage.toPaint());
 
         LOGGER.debug("\n\nPolymorphism is here\n");
@@ -132,8 +132,8 @@ public class House002 {
         House<Boolean> houseOne = null;
         House<String> house = null;
         try {
-            houseOne = new House<>("Round", "Liveable", stage, 3, "Brest, Center",false);
-            house = new House<>("Round", "Liveable", stage, 1, "Minsk, Center","NO");
+            houseOne = new House<>("Round", "Liveable", stage, 3, "Brest, Center", false);
+            house = new House<>("Round", "Liveable", stage, 1, "Minsk, Center", "NO");
         } catch (InvalidCountStageException | InvalidAddressException e) {
             LOGGER.debug("Incorrect number of (count)Stages or Address name.  " + e.getLocalizedMessage(), e);
         } catch (Exception e) {
@@ -146,6 +146,8 @@ public class House002 {
         }
 
         LOGGER.debug("        -----       -----        ----           ");
+
+        house.printFurnitureInfo();
 
         assert house != null;
         LOGGER.debug(house.toString());

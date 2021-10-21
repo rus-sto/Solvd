@@ -1,31 +1,31 @@
-2021-43-20 20:43:41.702 [main] DEBUG hw002.house.House002 - Посчитать площадь всех стен в доме, Массивы, Несколько вложенных циклов
+2021-27-21 17:27:26.381 [main] DEBUG hw002.house.House002 - Посчитать площадь всех стен в доме, Массивы, Несколько вложенных циклов
 
-2021-43-20 20:43:41.710 [main] DEBUG hw002.house.sostav.Element -  this material is Brick It's length and height  are - 0.2 - 0.1
-2021-43-20 20:43:41.711 [main] DEBUG hw002.house.House002 - [This Elementlength=0.2, height=0.1, material='Brick'}, This Elementlength=5.0, height=2.0, material='Beton'}, This Elementlength=6.0, height=2.0, material='Cement'}, This Elementlength=4.0, height=2.0, material='Steel'}]
+2021-27-21 17:27:26.386 [main] DEBUG hw002.house.sostav.Element -  this material is Brick It's length and height  are - 0.2 - 0.1
+2021-27-21 17:27:26.387 [main] DEBUG hw002.house.House002 - [This Elementlength=0.2, height=0.1, material='Brick'}, This Elementlength=5.0, height=2.0, material='Beton'}, This Elementlength=6.0, height=2.0, material='Cement'}, This Elementlength=4.0, height=2.0, material='Steel'}]
 
-2021-43-20 20:43:41.712 [main] DEBUG hw002.house.sostav.Wall - The Wall is colored in nice Color
-2021-43-20 20:43:41.712 [main] DEBUG hw002.house.House002 - 
+2021-27-21 17:27:26.388 [main] DEBUG hw002.house.sostav.Wall - The Wall is colored in nice Color
+2021-27-21 17:27:26.388 [main] DEBUG hw002.house.House002 - 
 
-2021-43-20 20:43:41.713 [main] DEBUG hw002.house.room.Floor - no heater on this floor
-2021-43-20 20:43:41.715 [main] DEBUG hw002.house.room.Ceiling - The ceiling is colored in white  Color
-2021-43-20 20:43:41.716 [main] DEBUG hw002.house.House002 - 
+2021-27-21 17:27:26.389 [main] DEBUG hw002.house.room.Floor - no heater on this floor
+2021-27-21 17:27:26.392 [main] DEBUG hw002.house.room.Ceiling - The ceiling is colored in white  Color
+2021-27-21 17:27:26.392 [main] DEBUG hw002.house.House002 - 
 
 Room is nice colored
-2021-43-20 20:43:41.717 [main] DEBUG hw002.house.House002 - 
+2021-27-21 17:27:26.393 [main] DEBUG hw002.house.House002 - 
 
 
-2021-43-20 20:43:41.718 [main] DEBUG hw002.house.room.Room - 1 days 12:0:0
-2021-43-20 20:43:41.718 [main] DEBUG hw002.house.room.Room - 1 days 12:0:0
-2021-43-20 20:43:41.719 [main] DEBUG hw002.house.room.Room - 1 days 12:0:0
-2021-43-20 20:43:41.719 [main] DEBUG hw002.house.room.Room - 0 days 22:0:0
-2021-43-20 20:43:41.719 [main] DEBUG hw002.house.room.Room - 1 days 14:0:0
-2021-43-20 20:43:41.720 [main] DEBUG hw002.house.room.Room - 0 days 22:0:0
-2021-43-20 20:43:41.720 [main] DEBUG hw002.house.room.Room - 1 days 14:0:0
-2021-43-20 20:43:41.721 [main] DEBUG hw002.house.room.Room - 0 days 22:0:0
-2021-43-20 20:43:41.721 [main] DEBUG hw002.house.room.Room - 1 days 14:0:0
-2021-43-20 20:43:41.721 [main] DEBUG hw002.house.House002 - 
+2021-27-21 17:27:26.394 [main] DEBUG hw002.house.room.Room - 1 days 12:0:0
+2021-27-21 17:27:26.394 [main] DEBUG hw002.house.room.Room - 1 days 12:0:0
+2021-27-21 17:27:26.395 [main] DEBUG hw002.house.room.Room - 1 days 12:0:0
+2021-27-21 17:27:26.395 [main] DEBUG hw002.house.room.Room - 0 days 22:0:0
+2021-27-21 17:27:26.396 [main] DEBUG hw002.house.room.Room - 1 days 14:0:0
+2021-27-21 17:27:26.396 [main] DEBUG hw002.house.room.Room - 0 days 22:0:0
+2021-27-21 17:27:26.396 [main] DEBUG hw002.house.room.Room - 1 days 14:0:0
+2021-27-21 17:27:26.396 [main] DEBUG hw002.house.room.Room - 0 days 22:0:0
+2021-27-21 17:27:26.396 [main] DEBUG hw002.house.room.Room - 1 days 14:0:0
+2021-27-21 17:27:26.397 [main] DEBUG hw002.house.House002 - 
 
- flatRoomMap
+ flatRooms
 {
 
   
@@ -83,48 +83,50 @@ This roomType='Living-room,
 And It can be produced for 136800 sec,
 floor=Floor{material='Laminat', isHeated=true}, ceiling=Ceiling{isLighted=true, color='white'}, 
 walls=[Wall{element=This Elementlength=5.0, height=2.0, material='Beton'}, countElement=1}, Wall{element=This Elementlength=6.0, height=2.0, material='Cement'}, countElement=1}, Wall{element=This Elementlength=4.0, height=2.0, material='Steel'}, countElement=2}]'}]}
-2021-43-20 20:43:41.724 [main] DEBUG hw002.house.House002 -      ----  the stage is already painted
-2021-43-20 20:43:41.724 [main] DEBUG hw002.house.House002 - 
+2021-27-21 17:27:26.399 [main] DEBUG hw002.house.House002 -      ----  the stage is already painted
+2021-27-21 17:27:26.399 [main] DEBUG hw002.house.House002 - 
 
 Polymorphism is here
 
-2021-43-20 20:43:41.725 [main] DEBUG hw002.house.House002 - floorThreeFloor{material='Lenoleum', isHeated=false}
-2021-43-20 20:43:41.725 [main] DEBUG hw002.house.Polymorphism - you cannot heat this floor
-2021-43-20 20:43:41.725 [main] DEBUG hw002.house.House002 - floorTwoFloor{material='Laminat', isHeated=true}
-2021-43-20 20:43:41.725 [main] DEBUG hw002.house.room.Floor - heater is on
-2021-43-20 20:43:41.725 [main] DEBUG hw002.house.Polymorphism - the floor is heating now
-2021-43-20 20:43:41.726 [main] DEBUG hw002.house.House002 - 
+2021-27-21 17:27:26.400 [main] DEBUG hw002.house.House002 - floorThreeFloor{material='Lenoleum', isHeated=false}
+2021-27-21 17:27:26.400 [main] DEBUG hw002.house.Polymorphism - you cannot heat this floor
+2021-27-21 17:27:26.400 [main] DEBUG hw002.house.House002 - floorTwoFloor{material='Laminat', isHeated=true}
+2021-27-21 17:27:26.400 [main] DEBUG hw002.house.room.Floor - heater is on
+2021-27-21 17:27:26.400 [main] DEBUG hw002.house.Polymorphism - the floor is heating now
+2021-27-21 17:27:26.400 [main] DEBUG hw002.house.House002 - 
 
 
-2021-43-20 20:43:41.728 [main] DEBUG hw002.house.dom.House - New house has been created
-2021-43-20 20:43:41.728 [main] DEBUG hw002.house.House002 - End of setting the house
-2021-43-20 20:43:41.729 [main] DEBUG hw002.house.House002 - Do smth in 'try block'
-2021-43-20 20:43:41.729 [main] INFO  hw002.house.ConnectionResource - Connection was closed
-2021-43-20 20:43:41.729 [main] DEBUG hw002.house.House002 -         -----       -----        ----           
-2021-43-20 20:43:41.740 [main] DEBUG hw002.house.dom.House - If we start building - 2021-10-20T20:43:41.740786200
-2021-43-20 20:43:41.741 [main] DEBUG hw002.house.room.Room - 0 days 22:0:0
-2021-43-20 20:43:41.741 [main] DEBUG hw002.house.room.Room - 1 days 14:0:0
-2021-43-20 20:43:41.741 [main] DEBUG hw002.house.room.Room - 1 days 12:0:0
-2021-43-20 20:43:41.741 [main] DEBUG hw002.house.dom.House - We need 345600 seconds to build this house!
-2021-43-20 20:43:41.742 [main] DEBUG hw002.house.dom.House - 4 days 0:0:0
-2021-43-20 20:43:41.742 [main] DEBUG hw002.house.dom.House - The building will be finished at 2021-10-24T20:43:41.742798400
-2021-43-20 20:43:41.742 [main] DEBUG hw002.house.House002 - 
+2021-27-21 17:27:26.403 [main] DEBUG hw002.house.dom.House - New house has been created
+2021-27-21 17:27:26.404 [main] DEBUG hw002.house.House002 - End of setting the house
+2021-27-21 17:27:26.405 [main] DEBUG hw002.house.House002 - Do smth in 'try block'
+2021-27-21 17:27:26.405 [main] INFO  hw002.house.ConnectionResource - Connection was closed
+2021-27-21 17:27:26.406 [main] DEBUG hw002.house.House002 -         -----       -----        ----           
+2021-27-21 17:27:26.406 [main] DEBUG hw002.house.dom.House - As to furniture, this house has it. -NO
+2021-27-21 17:27:26.411 [main] DEBUG hw002.house.dom.House - If we start building - 2021-10-21T17:27:26.411542200
+2021-27-21 17:27:26.411 [main] DEBUG hw002.house.room.Room - 0 days 22:0:0
+2021-27-21 17:27:26.412 [main] DEBUG hw002.house.room.Room - 1 days 14:0:0
+2021-27-21 17:27:26.412 [main] DEBUG hw002.house.room.Room - 1 days 12:0:0
+2021-27-21 17:27:26.412 [main] DEBUG hw002.house.dom.House - We need 345600 seconds to build this house!
+2021-27-21 17:27:26.413 [main] DEBUG hw002.house.dom.House - 4 days 0:0:0
+2021-27-21 17:27:26.413 [main] DEBUG hw002.house.dom.House - The building will be finished at 2021-10-25T17:27:26.413543400
+2021-27-21 17:27:26.413 [main] DEBUG hw002.house.House002 - 
 
         -----       -----        ----           
 This House's address is Minsk, Center',
  It has 1 Stages,
 This house walls Total area is 96.0m2
- Building time - 345600 sek}
-2021-43-20 20:43:41.742 [main] DEBUG hw002.house.House002 -         -----       -----        ----           
-2021-43-20 20:43:41.742 [main] DEBUG hw002.house.House002 -  
-2021-43-20 20:43:41.743 [main] DEBUG hw002.house.room.Room - 
+ Building time - 345600 sek
+ has this house Furniture ? - NO}
+2021-27-21 17:27:26.413 [main] DEBUG hw002.house.House002 -         -----       -----        ----           
+2021-27-21 17:27:26.413 [main] DEBUG hw002.house.House002 -  
+2021-27-21 17:27:26.414 [main] DEBUG hw002.house.room.Room - 
 
 This room Bed-room walls area is 22.000000000000004 
  It's Floor is wood and it's ceiling Pink
-2021-43-20 20:43:41.743 [main] DEBUG hw002.house.room.Room - 
+2021-27-21 17:27:26.414 [main] DEBUG hw002.house.room.Room - 
 
 This room Living-room walls area is 38.0It's walls material is Brick 
  It's Floor is Laminat and it's ceiling white
-2021-43-20 20:43:41.743 [main] DEBUG hw002.house.House002 -  
-2021-43-20 20:43:41.743 [main] DEBUG hw002.house.room.Ceiling - This ceiling has Pink color
-2021-43-20 20:43:41.743 [main] DEBUG hw002.house.room.Ceiling - This ceiling has white color ; And It well lighted - true
+2021-27-21 17:27:26.414 [main] DEBUG hw002.house.House002 -  
+2021-27-21 17:27:26.414 [main] DEBUG hw002.house.room.Ceiling - This ceiling has Pink color
+2021-27-21 17:27:26.414 [main] DEBUG hw002.house.room.Ceiling - This ceiling has white color ; And It well lighted - true

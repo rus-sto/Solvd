@@ -74,7 +74,7 @@ public class Flat<T> implements Electrisized {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Flat flat = (Flat) o;
+        Flat<?> flat = (Flat<?>) o;
         return Objects.equals(rooms, flat.rooms);
     }
 

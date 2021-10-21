@@ -88,7 +88,7 @@ public class Element<T> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Element element = (Element) o;
+        Element<?> element = (Element<?>) o;
         return Double.compare(element.length, length) == 0 && Double.compare(element.height, height) == 0 && Objects.equals(material, element.material);
     }
 

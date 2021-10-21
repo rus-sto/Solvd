@@ -20,11 +20,10 @@ public class House<T> extends Building {
     private Stage stage;
     private int countStages;
     private String address;
-    private LocalDateTime startBuild;
-    private LocalDateTime finishBuild;
-    private T hasFurniture;
 
-    public House(String form, String type, Stage stage, int countStages, String address,T hasFurniture) throws InvalidCountStageException, InvalidAddressException {
+    private final T hasFurniture;
+
+    public House(String form, String type, Stage stage, int countStages, String address, T hasFurniture) throws InvalidCountStageException, InvalidAddressException {
         super(form, type);
         this.stage = stage;
         if (countStages <= 0) {
@@ -39,24 +38,27 @@ public class House<T> extends Building {
     }
 
     public double houseWallsAreaCalc() {
-        double houseWallsArea = stage.stageWallsAreaCalc() * countStages;
-        return houseWallsArea;
+        return stage.stageWallsAreaCalc() * countStages;
     }
 
     public long houseTimeProduceCalc() {
-        startBuild = LocalDateTime.now();
+        LocalDateTime startBuild = LocalDateTime.now();
         LOGGER.debug("If we start building - " + startBuild);
         long time = (long) stage.stageTimeProduceCalc() * countStages;
         LOGGER.debug("We need " + time + " seconds to build this house!");
         int days = (int) (time / 3600 / 24);
         int hour = (int) (time / 3600 % 24);
         int min = (int) (time / 60 % 60);
-        int sec = (int) (time / 1 % 60);
+        int sec = (int) (time % 60);
         String timeToBuild = String.format("%s days %s:%s:%s", days, hour, min, sec);
         LOGGER.debug(timeToBuild);
-        finishBuild = LocalDateTime.now().plusSeconds(time);
+        LocalDateTime finishBuild = LocalDateTime.now().plusSeconds(time);
         LOGGER.debug("The building will be finished at " + finishBuild);
         return time;
+    }
+
+    public void printFurnitureInfo() {
+        LOGGER.debug("As to furniture, this house has it. -" + hasFurniture);
     }
 
     @Override
@@ -106,6 +108,7 @@ public class House<T> extends Building {
                 ",\n It has " + countStages + " Stages," +
                 "\nThis house walls Total area is " + houseWallsAreaCalc() + "m2" +
                 "\n Building time - " + houseTimeProduceCalc() + " sek" +
+                "\n has this house Furniture ? - " + hasFurniture +
                 '}';
     }
 
@@ -113,7 +116,7 @@ public class House<T> extends Building {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        House house = (House) o;
+        House<?> house = (House<?>) o;
         return countStages == house.countStages
                 && Objects.equals(stage, house.stage)
                 && Objects.equals(address, house.address);

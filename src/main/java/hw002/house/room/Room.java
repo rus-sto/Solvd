@@ -15,13 +15,13 @@ public class Room implements Paintable {
 
     private static final LocalTime TIME_PRODUCE_ONE_SQUARE_METER = LocalTime.of(1, 0, 0);
 
-    private List<Wall> wallsList;
+    private List<Wall> walls;
     private Floor floor;
     private Ceiling ceiling;
     private String roomType;
 
-    public Room(List<Wall> wallsList, Floor floor, Ceiling ceiling, String roomType) {
-        this.wallsList = wallsList;
+    public Room(List<Wall> walls, Floor floor, Ceiling ceiling, String roomType) {
+        this.walls = walls;
         this.floor = floor;
         this.ceiling = ceiling;
         this.roomType = roomType;
@@ -29,7 +29,7 @@ public class Room implements Paintable {
 
     public double roomWallsAreaCalc() {
         double roomWallsArea = 0;
-        for (Wall wall : wallsList) {
+        for (Wall wall : walls) {
             roomWallsArea += wall.wallAreaCalc();
         }
         return roomWallsArea;
@@ -42,7 +42,7 @@ public class Room implements Paintable {
         int days = (int) (totalSeconds / 3600 / 24);
         int hour = (int) (totalSeconds / 3600 % 24);
         int min = (int) (totalSeconds / 60 % 60);
-        int sec = (int) (totalSeconds / 1 % 60);
+        int sec = (int) (totalSeconds % 60);
         LOGGER.debug(String.format("%s days %s:%s:%s", days, hour, min, sec));
         return totalSeconds;
     }
@@ -58,12 +58,12 @@ public class Room implements Paintable {
                 + " \n It's Floor is " + floor.getMaterial() + " and it's ceiling " + ceiling.getColor());
     }
 
-    public List<Wall> getWallsList() {
-        return wallsList;
+    public List<Wall> getWalls() {
+        return walls;
     }
 
-    public void setWallsList(List<Wall> wallsList) {
-        this.wallsList = wallsList;
+    public void setWalls(List<Wall> walls) {
+        this.walls = walls;
     }
 
     public Floor getFloor() {
@@ -98,7 +98,7 @@ public class Room implements Paintable {
                 " \nAnd It can be produced for " + roomTimeProduceCalc() + " sec" +
                 ",\nfloor=" + floor +
                 ", ceiling=" + ceiling +
-                ", \nwalls=" + wallsList.toString() +
+                ", \nwalls=" + walls.toString() +
                 '\'' +
                 '}';
     }
@@ -113,11 +113,11 @@ public class Room implements Paintable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return Objects.equals(wallsList, room.wallsList) && Objects.equals(roomType, room.roomType);
+        return Objects.equals(walls, room.walls) && Objects.equals(roomType, room.roomType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(wallsList, roomType);
+        return Objects.hash(walls, roomType);
     }
 }
